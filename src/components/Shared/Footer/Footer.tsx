@@ -10,7 +10,15 @@ const Footer = () => {
   return (
     <Box bgcolor="rgb(17, 26, 34)" py={5}>
       <Container>
-        <Stack direction="row" gap={4} justifyContent="center">
+        {/* Top Menu Links */}
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          gap={4}
+          justifyContent="center"
+          alignItems="center"
+          flexWrap="wrap"
+          textAlign="center"
+        >
           <Typography color="#fff" component={Link} href="/consultation">
             Consultation
           </Typography>
@@ -20,29 +28,43 @@ const Footer = () => {
           <Typography color="#fff">NGOs</Typography>
         </Stack>
 
-        <Stack direction="row" gap={2} justifyContent="center" py={3}>
-          <Image src={facebookIcon} width={30} height={30} alt="facebook" />
-          <Image src={instagramIcon} width={30} height={30} alt="facebook" />
-          <Image src={twitterIcon} width={30} height={30} alt="facebook" />
-          <Image src={linkedIcon} width={30} height={30} alt="facebook" />
-        </Stack>
-        <div className="border-b-[1px] border-dashed"></div>
+        {/* Social Icons */}
         <Stack
           direction="row"
+          gap={2}
+          justifyContent="center"
+          py={3}
+          flexWrap="wrap"
+        >
+          <Image src={facebookIcon} width={30} height={30} alt="facebook" />
+          <Image src={instagramIcon} width={30} height={30} alt="instagram" />
+          <Image src={twitterIcon} width={30} height={30} alt="twitter" />
+          <Image src={linkedIcon} width={30} height={30} alt="linkedin" />
+        </Stack>
+
+        {/* Divider */}
+        <div className="border-b-[1px] border-dashed border-gray-500"></div>
+
+        {/* Bottom Section */}
+        <Stack
+          direction={{ xs: "column", md: "row" }}
           gap={2}
           justifyContent="space-between"
           alignItems="center"
           py={3}
+          textAlign={{ xs: "center", md: "left" }}
         >
           <Typography component="p" color="white">
             &copy;2024 Ph HealthCare. All Rights Reserved.
           </Typography>
+
           <Typography
             variant="h4"
             component={Link}
             href="/"
             fontWeight={600}
             color="white"
+            sx={{ textDecoration: "none" }}
           >
             A
             <Box component="span" color="primary.main">
@@ -50,8 +72,9 @@ const Footer = () => {
             </Box>
             Health Care
           </Typography>
+
           <Typography component="p" color="white">
-            Privacy Policy! Terms & Conditions
+            Privacy Policy | Terms & Conditions
           </Typography>
         </Stack>
       </Container>
