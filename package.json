@@ -19,7 +19,9 @@
     "@mui/utils": "^7.3.0",
     "next": "^14.2.31",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.62.0",
+    "sonner": "^2.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",
