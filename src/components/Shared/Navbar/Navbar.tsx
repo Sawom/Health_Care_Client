@@ -3,13 +3,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   Box,
-  Button,
   Container,
   Drawer,
   IconButton,
   Stack,
   Typography,
 } from "@mui/material";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -23,6 +23,12 @@ export default function Navbar() {
     { label: "Diagnostics", href: "#" },
     { label: "NGOs", href: "#" },
   ];
+
+  // dynamic auth button
+  const AuthButton = dynamic(
+    () => import("@/components/UI/AuthButton/AuthButton"),
+    { ssr: false } // I use lazy loading concept. after received token this button will appear
+  );
 
   return (
     <Container>
@@ -44,7 +50,7 @@ export default function Navbar() {
           <Box component="span" color="primary.main">
             RS
           </Box>
-          Health Care
+          <span className="mx-2">Health Care</span>
         </Typography>
 
         {/* Desktop Menu */}
@@ -72,13 +78,9 @@ export default function Navbar() {
         </Stack>
 
         {/* Desktop Login Button */}
-        <Button
-          component={Link}
-          href="/login"
-          sx={{ display: { xs: "none", md: "inline-flex" } }}
-        >
-          Login
-        </Button>
+        <span className="hidden md:inline-flex">
+          <AuthButton />
+        </span>
 
         {/* Mobile Menu Button */}
         <IconButton
@@ -95,7 +97,11 @@ export default function Navbar() {
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
         PaperProps={{
-          sx: { width: "70%", p: 2 },
+          sx: {
+            width: "70%",
+            p: 2,
+            display: { xs: "block", md: "block", lg: "none" },
+          },
         }}
       >
         <Stack
@@ -129,14 +135,7 @@ export default function Navbar() {
             </Typography>
           ))}
 
-          <Button
-            variant="contained"
-            component={Link}
-            href="/login"
-            onClick={() => setMobileOpen(false)}
-          >
-            Login
-          </Button>
+          <AuthButton />
         </Stack>
       </Drawer>
     </Container>

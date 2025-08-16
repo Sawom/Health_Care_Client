@@ -1,3 +1,4 @@
+"use client";
 import { getUserInfo, removeUser } from "@/services/auth.services";
 import { Button } from "@mui/material";
 import Link from "next/link";
@@ -12,6 +13,7 @@ const AuthButton = () => {
     removeUser();
     router.refresh();
   };
+  
   return (
     <>
       {userInfo?.userId ? (
