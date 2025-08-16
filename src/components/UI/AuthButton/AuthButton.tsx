@@ -13,10 +13,10 @@ const AuthButton = () => {
     removeUser();
     router.refresh();
   };
-  
+
   return (
     <>
-      {userInfo?.userId ? (
+      {userInfo?.email ? (
         <Button color="error" onClick={handleLogOut}>
           Logout
         </Button>
