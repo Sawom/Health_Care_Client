@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+// login logout button handled with conditional rendering
 const AuthButton = () => {
   const userInfo = getUserInfo();
   const router = useRouter();
