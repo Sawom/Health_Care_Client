@@ -14,7 +14,7 @@ src/
  │   ├── rootReducer.ts
  │   ├── store.ts
  │   └── hooks.ts
- ├── lib/
+ ├── lib/Providers
  │   └── Providers.tsx
  ├── app/
  │   └── layout.tsx
@@ -56,7 +56,7 @@ export type AppDispatch = typeof store.dispatch;
 
 ## 3️⃣ Create a Provider Component
 
-**File:** `src/lib/Providers.tsx`
+**File:** `src/lib/Providers/Providers.tsx`
 
 ```tsx
 "use client";
