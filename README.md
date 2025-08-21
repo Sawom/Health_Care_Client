@@ -14,13 +14,15 @@ src/
  │   ├── rootReducer.ts
  │   ├── store.ts
  │   └── hooks.ts
- ├── lib/Providers
- │   └── Providers.tsx
+ ├── lib/
+ │   └── Providers/
+ │       └── Providers.tsx
  ├── app/
  │   └── layout.tsx
  └── components/
      ├── Header.tsx
      └── Footer.tsx
+
 ```
 
 ---
