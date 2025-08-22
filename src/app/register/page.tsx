@@ -125,7 +125,7 @@ const RegisterPage = () => {
                   <Rinput
                     label="Name"
                     size="small"
-                    fullWidth
+                    fullWidth={true}
                     name="patient.name"
                   />
                 </div>
@@ -138,7 +138,7 @@ const RegisterPage = () => {
                       label="Email"
                       type="email"
                       size="small"
-                      fullWidth
+                      fullWidth={true}
                       name="patient.email"
                     />
                   </div>
@@ -148,7 +148,7 @@ const RegisterPage = () => {
                       label="Password"
                       type="password"
                       size="small"
-                      fullWidth
+                      fullWidth={true}
                       name="password"
                     />
                   </div>
@@ -161,7 +161,7 @@ const RegisterPage = () => {
                       label="Contact Number"
                       type="tel"
                       size="small"
-                      fullWidth
+                      fullWidth={true}
                       name="patient.contactNumber"
                     />
                   </div>
@@ -170,7 +170,7 @@ const RegisterPage = () => {
                       label="Address"
                       type="text"
                       size="small"
-                      fullWidth
+                      fullWidth={true}
                       name="patient.address"
                     />
                   </div>
@@ -181,7 +181,7 @@ const RegisterPage = () => {
                 sx={{
                   margin: "10px 0px",
                 }}
-                fullWidth
+                fullWidth={true}
                 type="submit"
               >
                 Register
