@@ -1,43 +1,39 @@
 "use client";
 import assets from "@/assets";
+import RForm from "@/components/Forms/RForm";
+import Rinput from "@/components/Forms/Rinput";
 import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.services";
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useState } from "react";
+import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
 
-export type FormValues = {
-  email: string;
-  password: string;
-};
+export const validationSchema = z.object({
+  email: z.string().email("Please enter a valid email address!"),
+  password: z.string().min(6, "Must be at least 6 characters"),
+});
 
 const LoginPage = () => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<FormValues>();
+  const [error, setError] = useState("");
 
-  const onSubmit: SubmitHandler<FormValues> = async (values) => {
+  const handleLogin = async (values: FieldValues) => {
     // console.log(values);
     try {
       const res = await userLogin(values);
       if (res?.data?.accessToken) {
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        router.push("/");
+        router.push("/dashboard");
+      } else {
+        setError(res.message);
+        // console.log(res);
       }
     } catch (err: any) {
       console.error(err.message);
@@ -81,28 +77,47 @@ const LoginPage = () => {
             </Box>
           </Stack>
 
+          {error && (
+            <Box>
+              <Typography
+                sx={{
+                  padding: "1px",
+                  borderRadius: "2px",
+                  color: "red",
+                  marginTop: "5px",
+                }}
+              >
+                {error}
+              </Typography>
+            </Box>
+          )}
           <Box>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <RForm
+              onSubmit={handleLogin}
+              resolver={zodResolver(validationSchema)}
+              defaultValues={{
+                email: "",
+                password: "",
+              }}
+            >
               {/* Tailwind responsive */}
               <div className="flex flex-col md:flex-row gap-4 my-2">
+                {/* email */}
                 <div className="w-full md:w-1/2">
-                  <TextField
+                  <Rinput
+                    name="email"
                     label="Email"
                     type="email"
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    {...register("email")}
+                    fullWidth={true}
                   />
                 </div>
+                {/* password */}
                 <div className="w-full md:w-1/2">
-                  <TextField
+                  <Rinput
+                    name="password"
                     label="Password"
                     type="password"
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    {...register("password")}
+                    fullWidth={true}
                   />
                 </div>
               </div>
@@ -121,7 +136,7 @@ const LoginPage = () => {
                 sx={{
                   margin: "10px 0px",
                 }}
-                fullWidth
+                fullWidth={true}
                 type="submit"
               >
                 Login
@@ -131,10 +146,10 @@ const LoginPage = () => {
                 fontWeight={300}
                 fontSize={{ xs: "0.9rem", md: "1rem" }}
               >
-                Don&apos;t have an account?{" "}
+                Don&apos;t have an account?
                 <Link href="/register">Create an account</Link>
               </Typography>
-            </form>
+            </RForm>
           </Box>
         </Box>
       </Stack>
