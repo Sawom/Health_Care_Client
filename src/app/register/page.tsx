@@ -1,23 +1,34 @@
 // react hook form used
 "use client";
 import assets from "@/assets";
+import RForm from "@/components/Forms/RForm";
+import Rinput from "@/components/Forms/Rinput";
 import { registerPatient } from "@/services/actions/registerPatient";
 import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.services";
 import { modifyPayload } from "@/utils/modifyPayload";
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
+
+export const patientValidationSchema = z.object({
+  name: z.string().min(1, "Please enter your name!"),
+  email: z.string().email("Please enter a valid email address!"),
+  contactNumber: z
+    .string()
+    .regex(/^\d{11}$/, "Please provide a valid phone number!"),
+  address: z.string().min(1, "Please enter your address!"),
+});
+
+export const validationSchema = z.object({
+  password: z.string().min(6, "Must be at least 6 characters"),
+  patient: patientValidationSchema,
+});
 
 // backend form er data's format:
 //  {
@@ -31,31 +42,20 @@ import { toast } from "sonner";
 // }
 // so we need to create this type data format
 
-// at first we create *IPatientData* interface.
-//  then we pass this as an object in another interface named IPatientRegisterFormData
-
-interface IPatientData {
-  name: string;
-  email: string;
-  contactNumber: string;
-  address: string;
-}
-
-interface IPatientRegisterFormData {
-  password: string;
-  patient: IPatientData;
-}
+export const defaultValues = {
+  password: "",
+  patient: {
+    name: "",
+    email: "",
+    contactNumber: "",
+    address: "",
+  },
+};
 
 const RegisterPage = () => {
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<IPatientRegisterFormData>();
 
-  const onSubmit: SubmitHandler<IPatientRegisterFormData> = async (values) => {
+  const handleRegister = async (values: FieldValues) => {
     const data = modifyPayload(values);
     // console.log(data);
     try {
@@ -69,7 +69,7 @@ const RegisterPage = () => {
         });
         if (result?.data?.accessToken) {
           storeUserInfo({ accessToken: result?.data?.accessToken });
-          router.push("/");
+          router.push("/dashboard");
         }
       }
     } catch (err: any) {
@@ -113,40 +113,43 @@ const RegisterPage = () => {
           </Stack>
 
           <Box>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <RForm
+              onSubmit={handleRegister}
+              resolver={zodResolver(validationSchema)}
+              defaultValues={defaultValues}
+            >
               {/*  Tailwind responsive form layout */}
               <div className="flex flex-col gap-4 my-2">
-                {/* Full width field */}
+                {/* name */}
                 <div>
-                  <TextField
+                  <Rinput
                     label="Name"
-                    variant="outlined"
                     size="small"
                     fullWidth
-                    {...register("patient.name")}
+                    name="patient.name"
                   />
                 </div>
 
                 {/* Email & Password side by side on desktop */}
                 <div className="flex flex-col md:flex-row gap-4">
+                  {/* email */}
                   <div className="w-full md:w-1/2">
-                    <TextField
+                    <Rinput
                       label="Email"
                       type="email"
-                      variant="outlined"
                       size="small"
                       fullWidth
-                      {...register("patient.email")}
+                      name="patient.email"
                     />
                   </div>
+                  {/* password */}
                   <div className="w-full md:w-1/2">
-                    <TextField
+                    <Rinput
                       label="Password"
                       type="password"
-                      variant="outlined"
                       size="small"
                       fullWidth
-                      {...register("password")}
+                      name="password"
                     />
                   </div>
                 </div>
@@ -154,23 +157,21 @@ const RegisterPage = () => {
                 {/* Contact Number & Address side by side */}
                 <div className="flex flex-col md:flex-row gap-4">
                   <div className="w-full md:w-1/2">
-                    <TextField
+                    <Rinput
                       label="Contact Number"
                       type="tel"
-                      variant="outlined"
                       size="small"
                       fullWidth
-                      {...register("patient.contactNumber")}
+                      name="patient.contactNumber"
                     />
                   </div>
                   <div className="w-full md:w-1/2">
-                    <TextField
+                    <Rinput
                       label="Address"
                       type="text"
-                      variant="outlined"
                       size="small"
                       fullWidth
-                      {...register("patient.address")}
+                      name="patient.address"
                     />
                   </div>
                 </div>
@@ -188,7 +189,7 @@ const RegisterPage = () => {
               <Typography component="p" fontWeight={300}>
                 Do you already have an account? <Link href="/login">Login</Link>
               </Typography>
-            </form>
+            </RForm>
           </Box>
         </Box>
       </Stack>
