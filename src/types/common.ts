@@ -1,4 +1,4 @@
-import { USER_ROLE } from "@/contants/role";
+import { USER_ROLE } from "@/constants/role";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 

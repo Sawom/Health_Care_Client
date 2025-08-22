@@ -1,4 +1,4 @@
-import { authKey } from "@/contants/authkey";
+import { authKey } from "@/constants/authkey";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/types";
 import { getFromLocalStorage } from "@/utils/local-storage";
 import axios from "axios";
@@ -30,7 +30,6 @@ instance.interceptors.response.use(
   //@ts-ignore
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
     const responseObject: ResponseSuccessType = {
       data: response?.data?.data,
       meta: response?.data?.meta,
