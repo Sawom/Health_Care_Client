@@ -1,13 +1,11 @@
-import Link from "next/link";
+import { DrawerItem } from "@/types";
 import {
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import MailIcon from "@mui/icons-material/Mail";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import { DrawerItem } from "@/types";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 type IProps = {
