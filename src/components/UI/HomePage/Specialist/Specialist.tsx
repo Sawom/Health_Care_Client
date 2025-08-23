@@ -51,7 +51,7 @@ const Specialist = async () => {
           justifyContent="center"
           alignItems="center"
         >
-          {specialties.map((specialty: any) => (
+          {specialties.slice(0, 6).map((specialty: any) => (
             <Box
               key={specialty.id}
               sx={{

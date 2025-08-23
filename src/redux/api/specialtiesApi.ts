@@ -1,4 +1,3 @@
-// import { tagTypes } from "../tag-types";
 import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
@@ -14,6 +13,7 @@ const specialtiesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.specialties],
     }),
+
     // get all specialty data. only data get time we use query. rest time we use mutation
     getAllSpecialties: build.query({
       query: () => ({
@@ -22,6 +22,7 @@ const specialtiesApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.specialties],
     }),
+
     // delete data
     deleteSpecialty: build.mutation({
       query: (id) => ({

@@ -29,6 +29,7 @@ const SpecialtyModal = ({ open, setOpen }: TProps) => {
       }
     } catch (err: any) {
       console.error(err.message);
+      toast.error(err?.data?.message || "Something went wrong!");
     }
   };
 
