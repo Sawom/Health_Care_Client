@@ -1,5 +1,5 @@
 // reusable form component
-// FormProvider shares React Hook Form methods with all child inputs, so you don’t need to pass control or register to each one. 
+// FormProvider shares React Hook Form methods with all child inputs, so you don’t need to pass control or register to each one.
 // The <form onSubmit={handleSubmit(submit)}> handles form submission with React Hook Form’s validation.
 
 import {
