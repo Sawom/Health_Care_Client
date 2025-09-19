@@ -1,12 +1,13 @@
-import { Button, Grid } from "@mui/material";
+import PHSelectField from "@/components/Forms/PHSelectField";
+import RForm from "@/components/Forms/RForm";
+import Rinput from "@/components/Forms/Rinput";
+import PHFullScreenModal from "@/components/Shared/PHModal/PHFullScreenModal";
+import { useCreateDoctorMutation } from "@/redux/api/doctorApi";
+import { Gender } from "@/types";
+import { modifyPayload } from "@/utils/modifyPayload";
+import { Button } from "@mui/material";
+import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-
-
-
-
-
-
-
 
 type TProps = {
   open: boolean;
@@ -52,115 +53,99 @@ const DoctorModal = ({ open, setOpen }: TProps) => {
 
   return (
     <PHFullScreenModal open={open} setOpen={setOpen} title="Create New Doctor">
-      <PHForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
-        <Grid container spacing={2} sx={{ my: 5 }}>
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.name"
-              label="Name"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.email"
-              type="email"
-              label="Email"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
+      <RForm onSubmit={handleFormSubmit} defaultValues={defaultValues}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-5">
+          <Rinput
+            name="doctor.name"
+            label="Name"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
 
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="password"
-              type="password"
-              label="Password"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
+          <Rinput
+            name="doctor.email"
+            type="email"
+            label="Email"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
 
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.contactNumber"
-              label="Contract Number"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.address"
-              label="Address"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.registrationNumber"
-              label="Registration Number"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.experience"
-              type="number"
-              label="Experience"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <PHSelectField
-              items={Gender}
-              name="doctor.gender"
-              label="Gender"
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.apointmentFee"
-              type="number"
-              label="ApointmentFee"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.qualification"
-              label="Qualification"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
+          <Rinput
+            name="password"
+            type="password"
+            label="Password"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
 
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.currentWorkingPlace"
-              label="Current Working Place"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4}>
-            <PHInput
-              name="doctor.designation"
-              label="Designation"
-              fullWidth={true}
-              sx={{ mb: 2 }}
-            />
-          </Grid>
-        </Grid>
+          <Rinput
+            name="doctor.contactNumber"
+            label="Contract Number"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
+
+          <Rinput
+            name="doctor.address"
+            label="Address"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
+
+          <Rinput
+            name="doctor.registrationNumber"
+            label="Registration Number"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
+
+          <Rinput
+            name="doctor.experience"
+            type="number"
+            label="Experience"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
+
+          <PHSelectField
+            items={Gender}
+            name="doctor.gender"
+            label="Gender"
+            sx={{ mb: 2 }}
+          />
+
+          <Rinput
+            name="doctor.apointmentFee"
+            type="number"
+            label="ApointmentFee"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
+
+          <Rinput
+            name="doctor.qualification"
+            label="Qualification"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
+
+          <Rinput
+            name="doctor.currentWorkingPlace"
+            label="Current Working Place"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
+
+          <Rinput
+            name="doctor.designation"
+            label="Designation"
+            fullWidth={true}
+            sx={{ mb: 2 }}
+          />
+        </div>
 
         <Button type="submit">Create</Button>
-      </PHForm>
+      </RForm>
     </PHFullScreenModal>
   );
 };
