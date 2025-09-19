@@ -19,7 +19,7 @@ const DoctorModal = ({ open, setOpen }: TProps) => {
 
   const handleFormSubmit = async (values: FieldValues) => {
     console.log(values);
-    values.doctor.experience = Number(values.doctor.experience);  //string to number convert
+    values.doctor.experience = Number(values.doctor.experience); //string to number convert
     values.doctor.apointmentFee = Number(values.doctor.apointmentFee); //string to number convert
     const data = modifyPayload(values);
     try {

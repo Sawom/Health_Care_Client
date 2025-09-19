@@ -15,21 +15,21 @@ export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
 
 export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
-  //   console.log(authToken);
-  if (authToken) {
-    const decodedData: any = decodedToken(authToken);
-    return {
-      ...decodedData,
-      role: decodedData?.role.toLowerCase(),
-    };
-  }
+  console.log(authToken);
+  if (!authToken) return null;
+
+  const decodedData: any = decodedToken(authToken);
+  if (!decodedData) return null; //  invalid token safe guard
+
+  return {
+    ...decodedData,
+    role: decodedData?.role?.toLowerCase() || "", // safe optional chaining
+  };
 };
 
 export const isLoggedIn = () => {
   const authToken = getFromLocalStorage(authKey);
-  if (authToken) {
-    return !!authToken;
-  }
+  return !!authToken;
 };
 
 export const removeUser = () => {
