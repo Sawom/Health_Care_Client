@@ -51,7 +51,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
 
     setSelectedSpecialtiesIds(
       doctorData?.doctorSpecialties.map((sp: any) => {
-        return sp.specialtiesId;
+        return sp.specialitiesId;
       })
     );
   }, [isSuccess]);
@@ -88,7 +88,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
       })
     );
 
-    updatedValues.specialties = specialties;
+    updatedValues.doctorSpecialties = specialties;
 
     try {
       updateDoctor({ body: updatedValues, id });

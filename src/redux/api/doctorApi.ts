@@ -14,7 +14,7 @@ export const doctorApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.doctor],
     }),
-    // get all doctors  
+
     getAllDoctors: build.query({
       query: (arg: Record<string, any>) => ({
         url: "/doctor",

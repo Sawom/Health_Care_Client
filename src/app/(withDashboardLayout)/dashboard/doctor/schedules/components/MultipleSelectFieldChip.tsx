@@ -18,6 +18,30 @@ const MenuProps = {
   },
 };
 
+export function getTimeIn12HourFormat(dateTimeString: string): string {
+  const date: Date = new Date(dateTimeString);
+  const hours: number = date.getHours();
+  const minutes: number = date.getMinutes();
+  const ampm: string = hours >= 12 ? "PM" : "AM";
+  const formattedHours: number = hours % 12 === 0 ? 12 : hours % 12;
+  const formattedMinutes: string =
+    minutes < 10 ? "0" + minutes : minutes.toString();
+  return `${formattedHours}:${formattedMinutes} ${ampm}`;
+}
+
+const names = [
+  "Oliver Hansen",
+  "Van Henry",
+  "April Tucker",
+  "Ralph Hubbard",
+  "Omar Alexander",
+  "Carlos Abbott",
+  "Miriam Wagner",
+  "Bradley Wilkerson",
+  "Virginia Andrews",
+  "Kelly Snyder",
+];
+
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
   return {
     fontWeight:
@@ -27,70 +51,67 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
   };
 }
 
-export default function MultipleSelectChip({
-  allSpecialties,
-  setSelectedIds,
-  selectedIds = [],
+export default function MultipleSelectFieldChip({
+  schedules,
+  selectedScheduleIds,
+  setSelectedScheduleIds,
 }: any) {
   const theme = useTheme();
+  // const [personName, setPersonName] = React.useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent<typeof selectedIds>) => {
+  const handleChange = (
+    event: SelectChangeEvent<typeof selectedScheduleIds>
+  ) => {
     const {
       target: { value },
     } = event;
-
-    setSelectedIds(typeof value === "string" ? value.split(",") : value);
+    setSelectedScheduleIds(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
   };
 
   return (
     <div>
-      <FormControl sx={{ width: "100%" }}>
-        <InputLabel
-          id="demo-multiple-chip-label"
-          sx={{ mt: selectedIds.length > 0 ? 0 : -1 }}
-        >
-          Specialties
-        </InputLabel>
+      <FormControl sx={{ width: 300 }}>
+        <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={selectedIds}
+          value={selectedScheduleIds}
           onChange={handleChange}
-          input={
-            <OutlinedInput
-              id="select-multiple-chip"
-              label="Specialties"
-              size="small"
-            />
-          }
-          renderValue={(selected) => (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-              {selected.map((value: any) => (
-                <Chip
-                  size="small"
-                  key={value}
-                  label={
-                    allSpecialties.find((item: any) => item.id === value)
-                      ? `${
-                          allSpecialties.find((item: any) => item.id === value)
-                            ?.title
-                        }`
-                      : ""
-                  }
-                />
-              ))}
-            </Box>
-          )}
+          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          renderValue={(selected) => {
+            return (
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                {selected.map((value: any) => {
+                  const selectedSchedule = schedules.find(
+                    (schedule: any) => schedule.id === value
+                  );
+
+                  if (!selectedSchedule) return null;
+
+                  const formattedTimeSlot = `${getTimeIn12HourFormat(
+                    selectedSchedule.startDate
+                  )} - ${getTimeIn12HourFormat(selectedSchedule.endDate)}`;
+
+                  return <Chip key={value} label={formattedTimeSlot} />;
+                })}
+              </Box>
+            );
+          }}
           MenuProps={MenuProps}
         >
-          {allSpecialties?.map((item: any) => (
+          {schedules.map((schedule: any) => (
             <MenuItem
-              key={item?.id}
-              value={item.id}
-              style={getStyles(item.id, selectedIds, theme)}
+              key={schedule.id}
+              value={schedule.id}
+              style={getStyles(schedule.id, selectedScheduleIds, theme)}
             >
-              {item?.title}
+              {`${getTimeIn12HourFormat(
+                schedule.startDate
+              )} - ${getTimeIn12HourFormat(schedule.endDate)}`}
             </MenuItem>
           ))}
         </Select>
