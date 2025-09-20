@@ -10,7 +10,7 @@ export const doctorScheduleApi = baseApi.injectEndpoints({
         method: "POST",
         data,
       }),
-      invalidatesTags: [tagTypes.doctorSchedule],
+      invalidatesTags: [tagTypes.doctorSchedule], // invalidatesTags used for instant changes update
     }),
     getAllDoctorSchedules: build.query({
       query: (arg: Record<string, any>) => {

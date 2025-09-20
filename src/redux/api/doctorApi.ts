@@ -14,7 +14,7 @@ export const doctorApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.doctor],
     }),
-
+    // get all doctors  
     getAllDoctors: build.query({
       query: (arg: Record<string, any>) => ({
         url: "/doctor",
@@ -47,12 +47,15 @@ export const doctorApi = baseApi.injectEndpoints({
     }),
     // update a doctor
     updateDoctor: build.mutation({
-      query: (data) => ({
-        url: `/doctor/${data.id}`,
-        method: "PATCH",
-        data: data.body,
-      }),
-      invalidatesTags: [tagTypes.doctor],
+      query: (data) => {
+        console.log(data);
+        return {
+          url: `/doctor/${data.id}`,
+          method: "PATCH",
+          data: data.body,
+        };
+      },
+      invalidatesTags: [tagTypes.doctor, tagTypes.user],
     }),
   }),
 });
