@@ -1,6 +1,8 @@
 "use client";
-import { Avatar, Badge, Stack } from "@mui/material";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import { Avatar, Badge, Stack } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,9 +11,8 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import AccountMenu from "../AccountMenu/AccountMenu";
 import SideBar from "../SideBar/SideBar";
-import { useGetSingleUserQuery } from "@/redux/api/userApi";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 const drawerWidth = 240;
 
