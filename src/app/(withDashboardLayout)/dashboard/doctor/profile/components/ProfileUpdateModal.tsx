@@ -88,7 +88,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
       })
     );
 
-    updatedValues.doctorSpecialties = specialties;
+    updatedValues.specialties = specialties;
 
     try {
       updateDoctor({ body: updatedValues, id });
