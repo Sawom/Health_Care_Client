@@ -9,7 +9,7 @@ import {
 import { useGetAllSpecialtiesQuery } from "@/redux/api/specialtiesApi";
 import { Gender } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { z } from "zod";
@@ -106,84 +106,98 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
         defaultValues={doctorData}
         resolver={zodResolver(validationSchema)}
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-5">
-          <Rinput name="name" label="Name" sx={{ mb: 2 }} fullWidth />
+        <Grid container spacing={2} sx={{ my: 5 }}>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput name="name" label="Name" sx={{ mb: 2 }} fullWidth />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput
+              name="email"
+              type="email"
+              label="Email"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput
+              name="contactNumber"
+              label="Contract Number"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput name="address" label="Address" sx={{ mb: 2 }} fullWidth />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput
+              name="registrationNumber"
+              label="Registration Number"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput
+              name="experience"
+              type="number"
+              label="Experience"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <PHSelectField
+              items={Gender}
+              name="gender"
+              label="Gender"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput
+              name="apointmentFee"
+              type="number"
+              label="ApointmentFee"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput
+              name="qualification"
+              label="Qualification"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
 
-          <Rinput
-            name="email"
-            type="email"
-            label="Email"
-            sx={{ mb: 2 }}
-            fullWidth
-          />
-
-          <Rinput
-            name="contactNumber"
-            label="Contract Number"
-            sx={{ mb: 2 }}
-            fullWidth
-          />
-
-          <Rinput name="address" label="Address" sx={{ mb: 2 }} fullWidth />
-
-          <Rinput
-            name="registrationNumber"
-            label="Registration Number"
-            sx={{ mb: 2 }}
-            fullWidth
-          />
-
-          <Rinput
-            name="experience"
-            type="number"
-            label="Experience"
-            sx={{ mb: 2 }}
-            fullWidth
-          />
-
-          <PHSelectField
-            items={Gender}
-            name="gender"
-            label="Gender"
-            sx={{ mb: 2 }}
-            fullWidth
-          />
-
-          <Rinput
-            name="apointmentFee"
-            type="number"
-            label="ApointmentFee"
-            sx={{ mb: 2 }}
-            fullWidth
-          />
-
-          <Rinput
-            name="qualification"
-            label="Qualification"
-            sx={{ mb: 2 }}
-            fullWidth
-          />
-
-          <Rinput
-            name="currentWorkingPlace"
-            label="Current Working Place"
-            sx={{ mb: 2 }}
-            fullWidth
-          />
-
-          <Rinput
-            name="designation"
-            label="Designation"
-            sx={{ mb: 2 }}
-            fullWidth
-          />
-
-          <MultipleSelectChip
-            allSpecialties={allSpecialties}
-            selectedIds={selectedSpecialtiesIds}
-            setSelectedIds={setSelectedSpecialtiesIds}
-          />
-        </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput
+              name="currentWorkingPlace"
+              label="Current Working Place"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <Rinput
+              name="designation"
+              label="Designation"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
+          <div className="w-full sm:w-full md:w-1/3 px-1">
+            <MultipleSelectChip
+              allSpecialties={allSpecialties}
+              selectedIds={selectedSpecialtiesIds}
+              setSelectedIds={setSelectedSpecialtiesIds}
+            />
+          </div>
+        </Grid>
 
         <Button type="submit" disabled={updating}>
           Save

@@ -7,7 +7,7 @@ import {
 } from "@/redux/api/myProfile";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import DoctorInformation from "./components/DoctorInformations";
@@ -39,25 +39,24 @@ const Profile = () => {
         setOpen={setIsModalOpen}
         id={data?.id}
       />
-      <Container>
-        <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-5">
-          <div className="w-full md:w-1/3">
-            <Box
-              sx={{
-                height: 300,
-                width: "100%",
-                overflow: "hidden",
-                borderRadius: 1,
-              }}
-            >
-              <Image
-                height={300}
-                width={400}
-                src={data?.profilePhoto}
-                alt="User Photo"
-              />
-            </Box>
-
+      <div className="flex flex-col md:flex-row md:gap-8">
+        <div className="w-full md:w-1/3">
+          <Box
+            sx={{
+              height: 300,
+              width: "100%",
+              overflow: "hidden",
+              borderRadius: 1,
+            }}
+          >
+            <Image
+              height={300}
+              width={400}
+              src={data?.profilePhoto}
+              alt="User Photo"
+            />
+          </Box>
+          <Box my={3}>
             {updating ? (
               <p>Uploading...</p>
             ) : (
@@ -69,20 +68,20 @@ const Profile = () => {
                 variant="text"
               />
             )}
+          </Box>
 
-            <Button
-              fullWidth
-              endIcon={<ModeEditIcon />}
-              onClick={() => setIsModalOpen(true)}
-            >
-              Edit Profile
-            </Button>
-          </div>
-          <div className="w-full md:w-2/3">
-            <DoctorInformation data={data} />
-          </div>
+          <Button
+            fullWidth
+            endIcon={<ModeEditIcon />}
+            onClick={() => setIsModalOpen(true)}
+          >
+            Edit Profile
+          </Button>
         </div>
-      </Container>
+        <div className="w-full md:w-2/3">
+          <DoctorInformation data={data} />
+        </div>
+      </div>
     </>
   );
 };
