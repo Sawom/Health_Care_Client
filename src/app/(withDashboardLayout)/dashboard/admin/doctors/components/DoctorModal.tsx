@@ -20,7 +20,7 @@ const DoctorModal = ({ open, setOpen }: TProps) => {
   const handleFormSubmit = async (values: FieldValues) => {
     console.log(values);
     values.doctor.experience = Number(values.doctor.experience); //string to number convert
-    values.doctor.apointmentFee = Number(values.doctor.apointmentFee); //string to number convert
+    values.doctor.appointmentFee = Number(values.doctor.appointmentFee); //string to number convert
     const data = modifyPayload(values);
     try {
       const res = await createDoctor(data).unwrap();
@@ -43,7 +43,7 @@ const DoctorModal = ({ open, setOpen }: TProps) => {
       registrationNumber: "",
       gender: "",
       experience: 0,
-      apointmentFee: 0,
+      appointmentFee: 0,
       qualification: "",
       currentWorkingPlace: "",
       designation: "",
@@ -116,9 +116,9 @@ const DoctorModal = ({ open, setOpen }: TProps) => {
           />
 
           <Rinput
-            name="doctor.apointmentFee"
+            name="doctor.appointmentFee"
             type="number"
-            label="ApointmentFee"
+            label="appointmentFee"
             fullWidth={true}
             sx={{ mb: 2 }}
           />

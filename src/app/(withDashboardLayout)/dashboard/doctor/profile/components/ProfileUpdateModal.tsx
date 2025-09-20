@@ -9,7 +9,7 @@ import {
 import { useGetAllSpecialtiesQuery } from "@/redux/api/specialtiesApi";
 import { Gender } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Grid } from "@mui/material";
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { z } from "zod";
@@ -26,7 +26,7 @@ const validationSchema = z.object({
     (x) => (x ? x : undefined),
     z.coerce.number().int().optional()
   ),
-  apointmentFee: z.preprocess(
+  appointmentFee: z.preprocess(
     (x) => (x ? x : undefined),
     z.coerce.number().int().optional()
   ),
@@ -106,11 +106,11 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
         defaultValues={doctorData}
         resolver={zodResolver(validationSchema)}
       >
-        <Grid container spacing={2} sx={{ my: 5 }}>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+        <div className="flex flex-wrap gap-8 my-5">
+          <div className="w-full md:w-1/3">
             <Rinput name="name" label="Name" sx={{ mb: 2 }} fullWidth />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <Rinput
               name="email"
               type="email"
@@ -119,7 +119,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth
             />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <Rinput
               name="contactNumber"
               label="Contract Number"
@@ -127,10 +127,10 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth
             />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <Rinput name="address" label="Address" sx={{ mb: 2 }} fullWidth />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <Rinput
               name="registrationNumber"
               label="Registration Number"
@@ -138,7 +138,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth
             />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <Rinput
               name="experience"
               type="number"
@@ -147,7 +147,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth
             />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <PHSelectField
               items={Gender}
               name="gender"
@@ -156,16 +156,16 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth
             />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <Rinput
-              name="apointmentFee"
+              name="appointmentFee"
               type="number"
-              label="ApointmentFee"
+              label="appointmentFee"
               sx={{ mb: 2 }}
               fullWidth
             />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <Rinput
               name="qualification"
               label="Qualification"
@@ -174,7 +174,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
             />
           </div>
 
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <Rinput
               name="currentWorkingPlace"
               label="Current Working Place"
@@ -182,7 +182,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth
             />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <Rinput
               name="designation"
               label="Designation"
@@ -190,14 +190,14 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
               fullWidth
             />
           </div>
-          <div className="w-full sm:w-full md:w-1/3 px-1">
+          <div className="w-full md:w-1/3">
             <MultipleSelectChip
               allSpecialties={allSpecialties}
               selectedIds={selectedSpecialtiesIds}
               setSelectedIds={setSelectedSpecialtiesIds}
             />
           </div>
-        </Grid>
+        </div>
 
         <Button type="submit" disabled={updating}>
           Save

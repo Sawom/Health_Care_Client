@@ -7,7 +7,7 @@ export interface IDoctor {
   registrationNumber: string;
   experience: number | undefined;
   gender: "MALE" | "FEMALE";
-  apointmentFee: number | undefined;
+  appointmentFee: number | undefined;
   qualification: string;
   currentWorkingPlace: string;
   designation: string;

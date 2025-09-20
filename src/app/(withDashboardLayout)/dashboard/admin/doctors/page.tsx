@@ -54,7 +54,7 @@ const DoctorsPage = () => {
     { field: "email", headerName: "Email", flex: 1 },
     { field: "contactNumber", headerName: "Contact Number", flex: 1 },
     { field: "gender", headerName: "Gender", flex: 1 },
-    { field: "apointmentFee", headerName: "Appointment Fee", flex: 1 },
+    { field: "appointmentFee", headerName: "Appointment Fee", flex: 1 },
     {
       field: "action",
       headerName: "Action",

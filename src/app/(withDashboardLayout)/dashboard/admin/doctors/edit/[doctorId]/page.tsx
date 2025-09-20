@@ -31,7 +31,7 @@ const DoctorUpdatePage = ({ params }: TParams) => {
 
   const handleFormSubmit = async (values: FieldValues) => {
     values.experience = Number(values.experience);
-    values.apointmentFee = Number(values.apointmentFee);
+    values.appointmentFee = Number(values.appointmentFee);
     values.id = id;
     // console.log({ id: values.id, body: values });
 
@@ -54,7 +54,7 @@ const DoctorUpdatePage = ({ params }: TParams) => {
     registrationNumber: data?.registrationNumber || "",
     gender: data?.gender || "",
     experience: data?.experience || 0,
-    apointmentFee: data?.apointmentFee || 0,
+    appointmentFee: data?.appointmentFee || 0,
     qualification: data?.qualification || "",
     currentWorkingPlace: data?.currentWorkingPlace || "",
     designation: data?.designation || "",
@@ -119,9 +119,9 @@ const DoctorUpdatePage = ({ params }: TParams) => {
             />
 
             <Rinput
-              name="apointmentFee"
+              name="appointmentFee"
               type="number"
-              label="ApointmentFee"
+              label="appointmentFee"
               fullWidth={true}
               sx={{ mb: 2 }}
             />
