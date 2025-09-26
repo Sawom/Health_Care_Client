@@ -1,5 +1,4 @@
 import { jwtDecode } from "jwt-decode";
-import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -17,7 +16,8 @@ const roleBasedPrivateRoutes = {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const accessToken = cookies().get("accessToken")?.value;
+  // Correct synchronous cookie access
+  const accessToken = request.cookies.get("accessToken")?.value;
 
   if (!accessToken) {
     if (AuthRoutes.includes(pathname)) {

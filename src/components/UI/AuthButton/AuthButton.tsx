@@ -1,22 +1,21 @@
 "use client";
-import { getUserInfo, removeUser } from "@/services/auth.services";
+import useUserInfo from "@/hooks/useUserInfo";
+import { logoutUser } from "@/services/actions/logoutUser";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 // login logout button handled with conditional rendering
 const AuthButton = () => {
-  const userInfo = getUserInfo();
+  const userInfo = useUserInfo();
   const router = useRouter();
 
   const handleLogOut = () => {
-    removeUser();
-    router.refresh();
+    logoutUser(router);
   };
-
   return (
     <>
-      {userInfo?.email ? (
+      {userInfo?.userId ? (
         <Button color="error" onClick={handleLogOut}>
           Logout
         </Button>
