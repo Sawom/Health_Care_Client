@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 // login logout button handled with conditional rendering
 const AuthButton = () => {
   const userInfo = getUserInfo();
+  // console.log(userInfo);
   const router = useRouter();
 
   const handleLogOut = () => {
@@ -15,7 +16,7 @@ const AuthButton = () => {
   };
   return (
     <>
-      {userInfo?.userId ? (
+      {userInfo?.email ? (
         <Button color="error" onClick={handleLogOut}>
           Logout
         </Button>

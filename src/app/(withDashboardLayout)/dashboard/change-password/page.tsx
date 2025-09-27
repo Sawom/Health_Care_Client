@@ -20,19 +20,14 @@ const validationSchema = z.object({
 const ChangePassword = () => {
   const [changePassword] = useChangePasswordMutation();
   const router = useRouter();
+
   const onSubmit = async (values: FieldValues) => {
     try {
-      const res = await changePassword(values);
-
-      if ("data" in res && res.data.status === 200) {
-        logoutUser(router);
-        toast.success("Password Changed Successfully");
-      } else {
-        throw new Error("Incorrect Old Password");
-      }
+      const data = await changePassword(values).unwrap();
+      toast.success(data.message);
+      logoutUser(router);
     } catch (error) {
-      toast.success("Incorrect Old Password");
-      console.log(error);
+      toast.error("Incorrect Old Password");
     }
   };
 
