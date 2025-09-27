@@ -1,76 +1,112 @@
 // fetched only three doctor's data
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Button, Card, CardActions, CardContent } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Container,
+  Typography,
+} from "@mui/material";
+
 import Image from "next/image";
+import Link from "next/link";
 
 const TopRatedDoctors = async () => {
   const res = await fetch("http://localhost:5000/api/v1/doctor?page=1&limit=3");
   const { data: doctors } = await res.json();
   //   console.log(doctors);
-
   return (
     <section
       className="relative my-10 py-20 px-4 sm:px-6 lg:px-10"
       style={{
         backgroundColor: "rgba(20,20,20,0.1)",
-        clipPath: "polygon(0 0, 100% 5%, 100% 100%, 0 95%)", // polygon background design
+        clipPath: "polygon(0 0, 100% 3%, 100% 100%, 0 96%)", // polygon background design
       }}
     >
-      {/* Title */}
-      <div className="text-center mb-10">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+      <Box sx={{ textAlign: "center" }}>
+        <Typography variant="h4" component="h1" fontWeight={700}>
           Our Top Rated Doctors
-        </h1>
-        <p className="text-base sm:text-lg mt-2">
+        </Typography>
+        <Typography component="p" fontSize={18} fontWeight={400} sx={{ mt: 2 }}>
           Access to expert physicians and surgeons, advanced technologies
-        </p>
-        <p className="text-base sm:text-lg">
+        </Typography>
+        <Typography component="p" fontSize={18} fontWeight={400}>
           and top-quality surgery facilities right here.
-        </p>
-      </div>
+        </Typography>
+      </Box>
 
-      {/* Grid with tailwind */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {doctors.map((doctor: any) => (
-          <Card
-            key={doctor.id}
-            className="rounded-2xl shadow-md overflow-hidden flex flex-col"
-          >
-            <div className="relative w-full h-56">
-              <Image
-                src={doctor.profilePhoto}
-                alt="doctor"
-                fill
-                className="object-cover"
-              />
+      <Container sx={{ margin: "30px auto" }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
+          {doctors.map((doctor: any) => (
+            <div
+              key={doctor.id}
+              className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
+            >
+              <Card>
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: 300,
+                    "& img": {
+                      width: "100%",
+                      height: "100%",
+                      overflow: "hidden",
+                      objectFit: "cover",
+                    },
+                  }}
+                >
+                  <Image
+                    src={doctor.profilePhoto}
+                    alt="doctor"
+                    width={500}
+                    height={100}
+                  />
+                </Box>
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {doctor.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {doctor.qualification}, {doctor.designation}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" mt={1}>
+                    <LocationOnIcon /> {doctor.address}
+                  </Typography>
+                </CardContent>
+                <CardActions
+                  sx={{
+                    justifyContent: "space-between",
+                    px: 2,
+                    paddingBottom: "20px",
+                  }}
+                >
+                  <Button>Book Now</Button>
+                  <Button variant="outlined">View Profile</Button>
+                </CardActions>
+              </Card>
             </div>
-            <CardContent>
-              <h2 className="text-lg sm:text-xl font-semibold">
-                {doctor.name}
-              </h2>
-              <p className="text-sm text-gray-600">
-                {doctor.qualification}, {doctor.designation}
-              </p>
-              <p className="text-sm text-gray-600 mt-1 flex items-center gap-1">
-                <LocationOnIcon fontSize="small" /> {doctor.address}
-              </p>
-            </CardContent>
-            <CardActions className="flex justify-between px-4 pb-4 mt-auto">
-              <Button size="small" variant="contained">
-                Book Now
-              </Button>
-              <Button size="small" variant="outlined">
-                View Profile
-              </Button>
-            </CardActions>
-          </Card>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* View All */}
-      <div className="text-center mt-10">
-        <Button variant="outlined">View ALL</Button>
-      </div>
+        <Box
+          sx={{
+            textAlign: "center",
+          }}
+        >
+          <Button
+            variant="outlined"
+            sx={{
+              marginTop: "20px",
+            }}
+            component={Link}
+            href="/doctors"
+          >
+            View ALL
+          </Button>
+        </Box>
+      </Container>
     </section>
   );
 };
