@@ -1,13 +1,13 @@
 "use client";
-import useUserInfo from "@/hooks/useUserInfo";
 import { logoutUser } from "@/services/actions/logoutUser";
+import { getUserInfo } from "@/services/auth.services";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 // login logout button handled with conditional rendering
 const AuthButton = () => {
-  const userInfo = useUserInfo();
+  const userInfo = getUserInfo();
   const router = useRouter();
 
   const handleLogOut = () => {
