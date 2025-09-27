@@ -80,7 +80,7 @@ const ForgotPassword = () => {
             resolver={zodResolver(validationSchema)}
           >
             <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 md:col-span-6">
+              <div className="col-span-12 md:col-span-12">
                 <Rinput
                   name="email"
                   type="email"

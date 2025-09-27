@@ -122,15 +122,19 @@ const LoginPage = () => {
                 </div>
               </div>
 
-              <Typography
-                mb={1}
-                textAlign="end"
-                component="p"
-                fontWeight={300}
-                fontSize={{ xs: "0.85rem", md: "1rem" }}
-              >
-                Forgot Password?
-              </Typography>
+              <Link href={"/forgot-password"}>
+                <Typography
+                  mb={1}
+                  textAlign="end"
+                  component="p"
+                  fontWeight={300}
+                  sx={{
+                    textDecoration: "underline",
+                  }}
+                >
+                  Forgot Password?
+                </Typography>
+              </Link>
 
               <Button
                 sx={{
@@ -147,7 +151,9 @@ const LoginPage = () => {
                 fontSize={{ xs: "0.9rem", md: "1rem" }}
               >
                 Don&apos;t have an account?
-                <Link href="/register">Create an account</Link>
+                <Link href="/register" className="underline mx-3 ">
+                  Create an account
+                </Link>
               </Typography>
             </RForm>
           </Box>
