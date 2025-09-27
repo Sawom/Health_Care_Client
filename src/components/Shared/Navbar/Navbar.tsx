@@ -1,8 +1,11 @@
 "use client";
+import useUserInfo from "@/hooks/useUserInfo";
+import { logoutUser } from "@/services/actions/logoutUser";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   Box,
+  Button,
   Container,
   Drawer,
   IconButton,
@@ -11,9 +14,17 @@ import {
 } from "@mui/material";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Navbar() {
+  const userInfo = useUserInfo();
+  const router = useRouter();
+
+  const handleLogOut = () => {
+    logoutUser(router);
+  };
+
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const menuItems = [
@@ -75,11 +86,25 @@ export default function Navbar() {
               {item.label}
             </Typography>
           ))}
+          {/* dasshboard */}
+          {userInfo?.userId ? (
+            <Typography component={Link} href="/dashboard">
+              Dashboard
+            </Typography>
+          ) : null}
         </Stack>
 
-        {/* Desktop Login Button */}
+        {/* Desktop Logout/login Button */}
         <span className="hidden md:inline-flex">
-          <AuthButton />
+          {userInfo?.userId ? (
+            <Button color="error" onClick={handleLogOut}>
+              Logout
+            </Button>
+          ) : (
+            <Button component={Link} href="/login">
+              Login
+            </Button>
+          )}
         </span>
 
         {/* Mobile Menu Button */}
@@ -135,7 +160,23 @@ export default function Navbar() {
             </Typography>
           ))}
 
-          <AuthButton />
+          {/* dashboard  */}
+          {userInfo?.userId ? (
+            <Typography component={Link} href="/dashboard">
+              Dashboard
+            </Typography>
+          ) : null}
+
+          {/* Desktop Logout/login Button */} 
+          {userInfo?.userId ? (
+            <Button color="error" onClick={handleLogOut}>
+              Logout
+            </Button>
+          ) : (
+            <Button component={Link} href="/login">
+              Login
+            </Button>
+          )}
         </Stack>
       </Drawer>
     </Container>
