@@ -6,7 +6,7 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import { Box, IconButton } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
-import { getTimeIn12HourFormat } from "../doctor/schedules/components/MultipleSelectFieldChip";
+import { getTimeIn12HourFormat } from "../../doctor/schedules/components/MultipleSelectFieldChip";
 
 const PatientAppointmentsPage = () => {
   const { data, isLoading } = useGetMyAppointmentsQuery({});
