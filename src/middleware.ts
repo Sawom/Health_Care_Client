@@ -5,7 +5,11 @@ import { NextResponse } from "next/server";
 type Role = keyof typeof roleBasedPrivateRoutes;
 
 const AuthRoutes = ["/login", "/register"];
-const commonPrivateRoutes = ["/dashboard", "/dashboard/change-password"];
+const commonPrivateRoutes = [
+  "/dashboard",
+  "/dashboard/change-password",
+  "/doctors",
+];
 const roleBasedPrivateRoutes = {
   PATIENT: [/^\/dashboard\/patient/],
   DOCTOR: [/^\/dashboard\/doctor/],
@@ -16,7 +20,6 @@ const roleBasedPrivateRoutes = {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Correct synchronous cookie access
   const accessToken = request.cookies.get("accessToken")?.value;
 
   if (!accessToken) {
@@ -27,7 +30,11 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  if (accessToken && commonPrivateRoutes.includes(pathname)) {
+  if (
+    accessToken &&
+    (commonPrivateRoutes.includes(pathname) ||
+      commonPrivateRoutes.some((route) => pathname.startsWith(route)))
+  ) {
     return NextResponse.next();
   }
 
@@ -50,5 +57,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/register", "/dashboard/:page*"],
+  matcher: ["/login", "/register", "/dashboard/:page*", "/doctors/:page*"],
 };

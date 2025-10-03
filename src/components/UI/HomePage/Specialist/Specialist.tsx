@@ -1,6 +1,7 @@
 // fetched specialist data
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
 const Specialist = async () => {
   const res = await fetch("http://localhost:5000/api/v1/specialties", {
@@ -74,6 +75,8 @@ const Specialist = async () => {
                   transition: "all 0.5s",
                 },
               }}
+              component={Link}
+              href={`/doctors?specialties=${specialty.title}`}
             >
               <Image
                 src={specialty.icon}
