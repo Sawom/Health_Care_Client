@@ -14,6 +14,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const TopRatedDoctors = async () => {
+  const placeholder =
+    "https://static.vecteezy.com/system/resources/thumbnails/026/489/224/small_2x/muslim-malay-woman-doctor-in-hospital-with-copy-space-ai-generated-photo.jpg";
+
   const res = await fetch("http://localhost:5000/api/v1/doctor?page=1&limit=3");
   const { data: doctors } = await res.json();
   //   console.log(doctors);
@@ -58,7 +61,9 @@ const TopRatedDoctors = async () => {
                   }}
                 >
                   <Image
-                    src={doctor.profilePhoto}
+                    src={
+                      doctor?.profilePhoto ? doctor.profilePhoto : placeholder
+                    }
                     alt="doctor"
                     width={500}
                     height={100}
@@ -82,8 +87,16 @@ const TopRatedDoctors = async () => {
                     paddingBottom: "20px",
                   }}
                 >
-                  <Button>Book Now</Button>
-                  <Button variant="outlined">View Profile</Button>
+                  <Link href={`/doctors/${doctor?.id}`}>
+                    <Button>Book Now</Button>
+                  </Link>
+                  <Button
+                    variant="outlined"
+                    component={Link}
+                    href={`/doctors/${doctor.id}`}
+                  >
+                    View Profile
+                  </Button>
                 </CardActions>
               </Card>
             </div>

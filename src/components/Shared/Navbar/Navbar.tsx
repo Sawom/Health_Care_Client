@@ -26,11 +26,9 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const menuItems = [
-    { label: "Consultation", href: "/consultation" },
-    { label: "Health Plans", href: "#" },
-    { label: "Medicine", href: "#" },
-    { label: "Diagnostics", href: "#" },
-    { label: "NGOs", href: "#" },
+    { label: "About Us", href: "/about" },
+    { label: "Doctors", href: "/doctors" },
+    { label: "Medicine", href: "/medicine" },
   ];
 
   return (

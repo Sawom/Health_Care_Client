@@ -23,6 +23,9 @@ const InfoBoxStyles = {
 };
 
 const DoctorsProfilePage = async ({ params }: PropTypes) => {
+  const placeholder =
+    "https://static.vecteezy.com/system/resources/thumbnails/026/489/224/small_2x/muslim-malay-woman-doctor-in-hospital-with-copy-space-ai-generated-photo.jpg";
+
   const res = await fetch(`http://localhost:5000/api/v1/doctor/${params.id}`);
   const { data: doctor } = await res.json();
 
@@ -55,7 +58,7 @@ const DoctorsProfilePage = async ({ params }: PropTypes) => {
             <Stack direction="row" gap={3}>
               <Box sx={{ width: 281, height: 281, bgcolor: "#808080" }}>
                 <Image
-                  src={doctor?.profilePhoto}
+                  src={doctor?.profilePhoto ? doctor.profilePhoto : placeholder}
                   alt="doctor image"
                   width={281}
                   height={281}
@@ -117,7 +120,7 @@ const DoctorsProfilePage = async ({ params }: PropTypes) => {
                       }}
                     >
                       <Typography>
-                        Taka : {doctor?.apointmentFee} (incl. Vat)
+                        Taka : {doctor?.appointmentFee} (incl. Vat)
                       </Typography>
                       <Typography>Per consultation</Typography>
                     </Stack>

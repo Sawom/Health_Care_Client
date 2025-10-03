@@ -84,6 +84,7 @@ const DoctorScheduleSlots = ({ id }: { id: string }) => {
   const [createAppointment] = useCreateAppointmentMutation();
   const [initialPayment] = useInitialPaymentMutation();
 
+  // if schedule available then user can select that schedule and book appointment
   const handleBookAppointment = async () => {
     try {
       if (id && scheduleId) {
@@ -185,7 +186,7 @@ const DoctorScheduleSlots = ({ id }: { id: string }) => {
             )
           ) : (
             <span style={{ color: "red" }}>
-              No Schedule is Available Today!
+              No Schedule is Available Tomorrow!
             </span>
           )}
         </Stack>

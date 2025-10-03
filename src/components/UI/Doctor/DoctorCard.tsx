@@ -61,7 +61,7 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
                   variant="h6"
                   sx={{ color: "primary.main", fontWeight: "600" }}
                 >
-                  Taka : {doctor?.apointmentFee}
+                  Taka : {doctor?.appointmentFee}
                 </Typography>
                 <Typography
                   variant="caption"
@@ -79,7 +79,7 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
               </Typography>
             </Box>
             <Box>
-              <Link href={`/checkout/${doctor?.id}`}>
+              <Link href={`/doctors/${doctor?.id}`}>
                 <Button>Book Now</Button>
               </Link>
             </Box>
