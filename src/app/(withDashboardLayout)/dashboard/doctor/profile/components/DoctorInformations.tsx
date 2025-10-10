@@ -18,6 +18,7 @@ const DoctorInformation = ({ data }: any) => {
       </Typography>
 
       <Stack direction={{ xs: "column", md: "row" }} gap={2} flexWrap={"wrap"}>
+        {/* role */}
         <StyledInformationBox>
           <Typography color="secondary" variant="caption">
             Role
