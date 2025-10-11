@@ -62,7 +62,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
       isDeleted: false,
     }));
 
-    console.log({ id });
+    // console.log({ id });
     // return;
 
     // this field can not be changed

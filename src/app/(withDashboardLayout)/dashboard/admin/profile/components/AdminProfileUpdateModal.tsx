@@ -1,13 +1,10 @@
 import RForm from "@/components/Forms/RForm";
 import Rinput from "@/components/Forms/Rinput";
 import PHFullScreenModal from "@/components/Shared/PHModal/PHFullScreenModal";
-import {
-  useGetDoctorQuery,
-  useUpdateDoctorMutation,
-} from "@/redux/api/doctorApi";
-import { useGetAllSpecialtiesQuery } from "@/redux/api/specialtiesApi";
+import { useGetAdminQuery, useUpdateAdminMutation } from "@/redux/api/adminApi";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect, useState } from "react";
+import { Button } from "@mui/material";
+import React from "react";
 import { FieldValues } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,26 +20,12 @@ const validationSchema = z.object({
 });
 
 const AdminProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
-  const { data: doctorData, refetch, isSuccess } = useGetDoctorQuery(id);
-//   const { data: allSpecialties } = useGetAllSpecialtiesQuery(undefined);
-//   const [selectedSpecialtiesIds, setSelectedSpecialtiesIds] = useState([]);
+  const { data: adminData, refetch, isSuccess } = useGetAdminQuery(id);
 
-  const [updateDoctor, { isLoading: updating }] = useUpdateDoctorMutation();
-
-//   useEffect(() => {
-//     if (!isSuccess) return;
-
-//     setSelectedSpecialtiesIds(
-//       doctorData?.doctorSpecialties.map((sp: any) => {
-//         return sp.specialitiesId;
-//       })
-//     );
-//   }, [isSuccess]);
+  const [updateAdmin, { isLoading: updating }] = useUpdateAdminMutation();
 
   const submitHandler = async (values: FieldValues) => {
-    
     console.log({ id });
-    
 
     // this field can not be changed
     // so we are excluding them from the update
@@ -65,10 +48,8 @@ const AdminProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
       })
     );
 
-    // updatedValues.specialties = specialties;
-
     try {
-      updateDoctor({ body: updatedValues, id });
+      updateAdmin({ body: updatedValues, id });
       await refetch();
       setOpen(false);
     } catch (error) {
@@ -80,7 +61,7 @@ const AdminProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
     <PHFullScreenModal open={open} setOpen={setOpen} title="Update Profile">
       <RForm
         onSubmit={submitHandler}
-        defaultValues={doctorData}
+        defaultValues={adminData}
         resolver={zodResolver(validationSchema)}
       >
         <div className="flex flex-wrap gap-8 my-5">
@@ -88,7 +69,19 @@ const AdminProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
           <div className="w-full md:w-1/3">
             <Rinput name="name" label="Name" sx={{ mb: 2 }} fullWidth />
           </div>
+          {/* contact number */}
+          <div className="w-full md:w-1/3">
+            <Rinput
+              name="contactNumber"
+              label="Contract Number"
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+          </div>
         </div>
+        <Button type="submit" disabled={updating}>
+          Save
+        </Button>
       </RForm>
     </PHFullScreenModal>
   );
