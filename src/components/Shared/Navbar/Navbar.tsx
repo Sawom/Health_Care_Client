@@ -19,8 +19,9 @@ interface NavbarProps {
   role: UserRole;
 }
 
-export default function Navbar({ role }: NavbarProps): JSX.Element {
+export default function Navbar() {
   const userInfo = getUserInfo();
+  // console.log(userInfo);
 
   // dynamic auth button
   const AuthButton = dynamic(
@@ -35,7 +36,7 @@ export default function Navbar({ role }: NavbarProps): JSX.Element {
     { label: "About Us", href: "/about" },
     { label: "Doctors", href: "/doctors" },
     { label: "Medicine", href: "/medicine" },
-    { label: "Dashboard", href: `/dashboard/${role}` },
+    { label: "Dashboard", href: `/dashboard/${userInfo.role}` },
   ];
 
   return (
