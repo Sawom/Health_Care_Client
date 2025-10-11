@@ -38,50 +38,49 @@ const AdminProfile = () => {
         open={isModalOpen}
         setOpen={setIsModalOpen}
         id={data?.id}
-      >
-        <div className="flex flex-col md:flex-row md:gap-8">
-          <div className="w-full md:w-1/3">
-            <Box
-              sx={{
-                height: 300,
-                width: "100%",
-                overflow: "hidden",
-                borderRadius: 1,
-              }}
-            >
-              <Image
-                height={300}
-                width={400}
-                src={data?.profilePhoto}
-                alt="User Photo"
+      />
+      <div className="flex flex-col md:flex-row md:gap-8">
+        <div className="w-full md:w-1/3">
+          <Box
+            sx={{
+              height: 300,
+              width: "100%",
+              overflow: "hidden",
+              borderRadius: 1,
+            }}
+          >
+            <Image
+              height={300}
+              width={400}
+              src={data?.profilePhoto}
+              alt="User Photo"
+            />
+          </Box>
+          <Box my={3}>
+            {updating ? (
+              <p>Uploading...</p>
+            ) : (
+              <AutoFileUploader
+                name="file"
+                label="Choose Your Profile Photo"
+                icon={<CloudUploadIcon />}
+                onFileUpload={fileUploadHandler}
+                variant="text"
               />
-            </Box>
-            <Box my={3}>
-              {updating ? (
-                <p>Uploading...</p>
-              ) : (
-                <AutoFileUploader
-                  name="file"
-                  label="Choose Your Profile Photo"
-                  icon={<CloudUploadIcon />}
-                  onFileUpload={fileUploadHandler}
-                  variant="text"
-                />
-              )}
-            </Box>
+            )}
+          </Box>
 
-            <Button
-              fullWidth
-              endIcon={<ModeEditIcon />}
-              onClick={() => setIsModalOpen(true)}
-            >
-              Edit Profile
-            </Button>
-          </div>
+          <Button
+            fullWidth
+            endIcon={<ModeEditIcon />}
+            onClick={() => setIsModalOpen(true)}
+          >
+            Edit Profile
+          </Button>
         </div>
-      </AdminProfileUpdateModal>
-      <div className="w-full md:w-2/3">
-        <AdminInformation data={data} />
+        <div className="w-full md:w-2/3">
+          <AdminInformation data={data} />
+        </div>
       </div>
     </>
   );
