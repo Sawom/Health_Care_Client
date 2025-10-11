@@ -1,5 +1,6 @@
 "use client";
 import { getUserInfo } from "@/services/auth.services";
+import { UserRole } from "@/types";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
@@ -14,13 +15,18 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Navbar() {
+interface NavbarProps {
+  role: UserRole;
+}
+
+export default function Navbar({ role }: NavbarProps): JSX.Element {
   const userInfo = getUserInfo();
 
   // dynamic auth button
   const AuthButton = dynamic(
     () => import("@/components/UI/AuthButton/AuthButton"),
-    { ssr: false } // I use lazy loading concept. after received token this button will appear
+    { ssr: false }
+    // I use lazy loading concept. after received token this button will appear
   );
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -29,6 +35,7 @@ export default function Navbar() {
     { label: "About Us", href: "/about" },
     { label: "Doctors", href: "/doctors" },
     { label: "Medicine", href: "/medicine" },
+    { label: "Dashboard", href: `/dashboard/${role}` },
   ];
 
   return (
@@ -85,7 +92,7 @@ export default function Navbar() {
         </Stack>
 
         {/* Desktop Logout/login Button */}
-        <span className="hidden md:inline-flex">
+        <span className="hidden lg:inline-flex">
           <AuthButton />
         </span>
 
