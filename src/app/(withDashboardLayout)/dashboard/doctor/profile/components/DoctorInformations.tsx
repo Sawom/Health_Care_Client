@@ -3,7 +3,7 @@ import { Box, Stack, styled, Typography } from "@mui/material";
 const StyledInformationBox = styled(Box)(({ theme }) => ({
   background: "#f4f7fe",
   borderRadius: theme.spacing(1),
-  width: "45%",
+  width: "70%",
   padding: "8px 16px",
   "& p": {
     fontWeight: 600,
@@ -25,24 +25,28 @@ const DoctorInformation = ({ data }: any) => {
           </Typography>
           <Typography>{data?.role}</Typography>
         </StyledInformationBox>
+        {/* name */}
         <StyledInformationBox>
           <Typography color="secondary" variant="caption">
             Name
           </Typography>
           <Typography>{data?.name}</Typography>
         </StyledInformationBox>
+        {/* email */}
         <StyledInformationBox>
           <Typography color="secondary" variant="caption">
             Email
           </Typography>
           <Typography>{data?.email}</Typography>
         </StyledInformationBox>
+        {/* gender */}
         <StyledInformationBox>
           <Typography color="secondary" variant="caption">
             Gender
           </Typography>
           <Typography>{data?.gender}</Typography>
         </StyledInformationBox>
+        {/* Designation */}
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
             Designation
@@ -73,6 +77,7 @@ const DoctorInformation = ({ data }: any) => {
           </Typography>
           <Typography>{data?.currentWorkingPlace}</Typography>
         </StyledInformationBox>
+        {/* joined */}
         <StyledInformationBox>
           <Typography variant="caption" color="secondary">
             Joined

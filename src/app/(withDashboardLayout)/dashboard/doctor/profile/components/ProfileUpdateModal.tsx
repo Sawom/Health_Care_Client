@@ -65,6 +65,8 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
     console.log({ id });
     // return;
 
+    // this field can not be changed
+    // so we are excluding them from the update
     const excludedFields: Array<keyof typeof values> = [
       "email",
       "id",
