@@ -1,6 +1,5 @@
 "use client";
 import { getUserInfo } from "@/services/auth.services";
-import { UserRole } from "@/types";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
@@ -14,10 +13,6 @@ import {
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
-
-interface NavbarProps {
-  role: UserRole;
-}
 
 export default function Navbar() {
   const userInfo = getUserInfo();
