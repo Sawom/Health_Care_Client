@@ -1,4 +1,5 @@
 import RForm from "@/components/Forms/RForm";
+import Rinput from "@/components/Forms/Rinput";
 import PHFullScreenModal from "@/components/Shared/PHModal/PHFullScreenModal";
 import {
   useGetDoctorQuery,
@@ -23,29 +24,25 @@ const validationSchema = z.object({
 
 const AdminProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
   const { data: doctorData, refetch, isSuccess } = useGetDoctorQuery(id);
-  const { data: allSpecialties } = useGetAllSpecialtiesQuery(undefined);
-  const [selectedSpecialtiesIds, setSelectedSpecialtiesIds] = useState([]);
+//   const { data: allSpecialties } = useGetAllSpecialtiesQuery(undefined);
+//   const [selectedSpecialtiesIds, setSelectedSpecialtiesIds] = useState([]);
 
   const [updateDoctor, { isLoading: updating }] = useUpdateDoctorMutation();
 
-  useEffect(() => {
-    if (!isSuccess) return;
+//   useEffect(() => {
+//     if (!isSuccess) return;
 
-    setSelectedSpecialtiesIds(
-      doctorData?.doctorSpecialties.map((sp: any) => {
-        return sp.specialitiesId;
-      })
-    );
-  }, [isSuccess]);
+//     setSelectedSpecialtiesIds(
+//       doctorData?.doctorSpecialties.map((sp: any) => {
+//         return sp.specialitiesId;
+//       })
+//     );
+//   }, [isSuccess]);
 
   const submitHandler = async (values: FieldValues) => {
-    const specialties = selectedSpecialtiesIds.map((specialtiesId: string) => ({
-      specialtiesId,
-      isDeleted: false,
-    }));
-
+    
     console.log({ id });
-    // return;
+    
 
     // this field can not be changed
     // so we are excluding them from the update
@@ -59,11 +56,7 @@ const AdminProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
       "updatedAt",
       "isDeleted",
       "averageRating",
-      "review",
       "profilePhoto",
-      "registrationNumber",
-      "schedules",
-      "doctorSpecialties",
     ];
 
     const updatedValues = Object.fromEntries(
@@ -72,7 +65,7 @@ const AdminProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
       })
     );
 
-    updatedValues.specialties = specialties;
+    // updatedValues.specialties = specialties;
 
     try {
       updateDoctor({ body: updatedValues, id });
@@ -89,7 +82,14 @@ const AdminProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
         onSubmit={submitHandler}
         defaultValues={doctorData}
         resolver={zodResolver(validationSchema)}
-      ></RForm>
+      >
+        <div className="flex flex-wrap gap-8 my-5">
+          {/* update name */}
+          <div className="w-full md:w-1/3">
+            <Rinput name="name" label="Name" sx={{ mb: 2 }} fullWidth />
+          </div>
+        </div>
+      </RForm>
     </PHFullScreenModal>
   );
 };

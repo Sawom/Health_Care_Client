@@ -112,15 +112,7 @@ const ProfileUpdateModal = ({ open, setOpen, id }: TProps) => {
           <div className="w-full md:w-1/3">
             <Rinput name="name" label="Name" sx={{ mb: 2 }} fullWidth />
           </div>
-          <div className="w-full md:w-1/3">
-            <Rinput
-              name="email"
-              type="email"
-              label="Email"
-              sx={{ mb: 2 }}
-              fullWidth
-            />
-          </div>
+
           <div className="w-full md:w-1/3">
             <Rinput
               name="contactNumber"
