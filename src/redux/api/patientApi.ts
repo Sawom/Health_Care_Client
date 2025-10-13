@@ -25,7 +25,7 @@ export const patientApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: IPatient[], meta: IMeta) => {
         return {
-          admins: response,
+          patients: response,
           meta,
         };
       },
