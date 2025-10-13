@@ -42,8 +42,6 @@ export interface IDoctor {
   specialties?: ISpecialties[];
 }
 
-
-
 export interface ISpecialties {
   specialtiesId: string;
   isDeleted?: null;

@@ -40,6 +40,7 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.admin],
     }),
+
     // get single admin
     getAdmin: build.query({
       query: (id: string | string[] | undefined) => ({
@@ -47,6 +48,7 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.admin],
     }),
+
     // update an admin
     updateAdmin: build.mutation({
       query: (data) => {
