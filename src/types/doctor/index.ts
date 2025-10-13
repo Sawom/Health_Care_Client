@@ -42,12 +42,7 @@ export interface IDoctor {
   specialties?: ISpecialties[];
 }
 
-export interface IAdmin {
-  id: string;
-  name: string;
-  profilePhoto: string;
-  contactNumber: string;
-}
+
 
 export interface ISpecialties {
   specialtiesId: string;

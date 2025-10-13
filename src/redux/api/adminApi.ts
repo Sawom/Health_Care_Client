@@ -1,5 +1,5 @@
 import { IMeta } from "@/types";
-import { IAdmin } from "@/types/doctor";
+import { IAdmin } from "@/types/admin/adminType";
 import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
