@@ -4,4 +4,5 @@ export interface IPatient {
   profilePhoto: string;
   contactNumber: string;
   address: string;
+  gender: "MALE" | "FEMALE";
 }

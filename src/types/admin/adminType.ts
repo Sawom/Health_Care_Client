@@ -3,4 +3,5 @@ export interface IAdmin {
   name: string;
   profilePhoto: string;
   contactNumber: string;
+  gender: "MALE" | "FEMALE";
 }
