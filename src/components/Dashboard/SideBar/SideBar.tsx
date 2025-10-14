@@ -1,10 +1,10 @@
 import assets from "@/assets";
-import { Box, List, Stack, Typography } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
 import { getUserInfo } from "@/services/auth.services";
 import { UserRole } from "@/types";
 import { drawerItems } from "@/utils/drawerItems";
+import { Box, List, Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import SidebarItem from "./SidebarItem";
 
@@ -38,7 +38,7 @@ const SideBar = () => {
             cursor: "pointer",
           }}
         >
-          PH Health Care
+          ARS Health Care
         </Typography>
       </Stack>
       <List>

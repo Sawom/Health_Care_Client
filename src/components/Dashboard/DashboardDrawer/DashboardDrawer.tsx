@@ -89,7 +89,7 @@ export default function DashboardDrawer({
                 component="div"
                 sx={{ color: "primary.main" }}
               >
-                Welcome to PH Health Care!
+                Welcome to ARS Health Care!
               </Typography>
             </Box>
             <Stack direction="row" gap={3}>
