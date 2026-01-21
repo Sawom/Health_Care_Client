@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import KeyIcon from "@mui/icons-material/Key";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -17,22 +17,23 @@ import { z } from "zod";
 const validationSchema = z.object({
   newPassword: z.string().min(6, "Must be at least 6 characters long"),
 });
-const ResetPassword = () => {
+
+const ResetPasswordForm = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const token = searchParams.get("token");
-  console.log({ id, token });
   const router = useRouter();
 
   const [resetPassword] = useResetPasswordMutation();
 
   useEffect(() => {
-    if (!token) return;
-    localStorage.setItem(authKey, token);
+    // সার্ভার সাইডে যাতে এরর না দেয় তাই চেক করা হচ্ছে
+    if (token && typeof window !== "undefined") {
+      localStorage.setItem(authKey, token);
+    }
   }, [token]);
 
   const onSubmit = async (values: FieldValues) => {
-    console.log(values);
     const updatedData = { ...values, id };
 
     try {
@@ -40,16 +41,19 @@ const ResetPassword = () => {
 
       if ("data" in res && res.data.status === 200) {
         toast.success("Password Reset Successful");
-        localStorage.removeItem(authKey);
+        if (typeof window !== "undefined") {
+          localStorage.removeItem(authKey);
+        }
         deleteCookies([authKey, "refreshToken"]);
         router.push("/login");
       } else {
         throw new Error("Something Went Wrong, Try Again");
       }
     } catch (error) {
-      toast.success("Something Went Wrong, Try Again");
+      toast.error("Something Went Wrong, Try Again");
     }
   };
+
   return (
     <Box
       sx={{
@@ -84,7 +88,7 @@ const ResetPassword = () => {
         resolver={zodResolver(validationSchema)}
       >
         <div className="grid grid-cols-12 gap-4">
-          <div className="col-span-12 md:col-span-6">
+          <div className="col-span-12">
             <Rinput
               name="newPassword"
               type="password"
@@ -101,6 +105,15 @@ const ResetPassword = () => {
         </Button>
       </RForm>
     </Box>
+  );
+};
+
+// ৩. মেইন পেজ (Suspense দিয়ে র‍্যাপ করা)
+const ResetPassword = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
   );
 };
 
