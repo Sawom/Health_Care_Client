@@ -25,7 +25,7 @@ const HeroSection = () => {
             zIndex: -1,
           }}
         >
-          <Image src={assets.svgs.grid} alt="" />
+          <Image src={assets.svgs.grid.src} alt="" />
         </Box>
 
         {/* Headings */}
