@@ -27,7 +27,6 @@ const ResetPasswordForm = () => {
   const [resetPassword] = useResetPasswordMutation();
 
   useEffect(() => {
-    // সার্ভার সাইডে যাতে এরর না দেয় তাই চেক করা হচ্ছে
     if (token && typeof window !== "undefined") {
       localStorage.setItem(authKey, token);
     }
@@ -68,14 +67,7 @@ const ResetPasswordForm = () => {
       }}
     >
       <Stack alignItems="center" justifyContent="center">
-        <Box
-          sx={{
-            "& svg": {
-              width: 100,
-              height: 100,
-            },
-          }}
-        >
+        <Box sx={{ "& svg": { width: 100, height: 100 } }}>
           <KeyIcon sx={{ color: "primary.main" }} />
         </Box>
         <Typography variant="h5" fontWeight={600} sx={{ mb: 2 }}>
@@ -99,7 +91,6 @@ const ResetPasswordForm = () => {
             />
           </div>
         </div>
-
         <Button type="submit" sx={{ width: "100%", my: 2 }}>
           Reset Password
         </Button>
@@ -108,13 +99,10 @@ const ResetPasswordForm = () => {
   );
 };
 
-// ৩. মেইন পেজ (Suspense দিয়ে র‍্যাপ করা)
-const ResetPassword = () => {
+export default function ResetPassword() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <ResetPasswordForm />
     </Suspense>
   );
-};
-
-export default ResetPassword;
+}
