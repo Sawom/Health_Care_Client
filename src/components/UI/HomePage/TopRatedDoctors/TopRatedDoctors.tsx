@@ -17,7 +17,9 @@ const TopRatedDoctors = async () => {
   const placeholder =
     "https://static.vecteezy.com/system/resources/thumbnails/026/489/224/small_2x/muslim-malay-woman-doctor-in-hospital-with-copy-space-ai-generated-photo.jpg";
 
-  const res = await fetch("http://localhost:5000/api/v1/doctor?page=1&limit=3");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctor?page=1&limit=3`,
+  );
   const { data: doctors } = await res.json();
   //   console.log(doctors);
   return (

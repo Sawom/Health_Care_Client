@@ -4,11 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Specialist = async () => {
-  const res = await fetch("http://localhost:5000/api/v1/specialties", {
-    next: {
-      revalidate: 30, // update content after 30s automatically if changes
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/specialties`,
+    {
+      next: {
+        revalidate: 30, // update content after 30s automatically if changes
+      },
     },
-  });
+  );
 
   const { data: specialties } = await res.json();
   //   console.log(specialties);
