@@ -20,12 +20,12 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={inter.className} suppressHydrationWarning={true}>
           <AppRouterCacheProvider>
-            <>
+            <Providers>
               <Toaster position="top-center" />
               {children}
-            </>
+            </Providers>
           </AppRouterCacheProvider>
         </body>
       </html>

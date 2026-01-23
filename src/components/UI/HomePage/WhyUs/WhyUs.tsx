@@ -1,25 +1,28 @@
-import assets from "@/assets";
 import chooseUsImg from "@/assets/choose-us.png";
+import awardIcon from "@/assets/svgs/award-icon.svg";
+import callIcon from "@/assets/svgs/call-icon.svg";
+import careIcon from "@/assets/svgs/care-icon.svg";
+import equipmentIcon from "@/assets/svgs/medical-equipment-icon.svg";
 import Image from "next/image";
 
 const servicesData = [
   {
-    imageSrc: assets.svgs.award,
+    imageSrc: awardIcon,
     title: "Award Winning Service",
     description: "Recognized for excellence with trusted healthcare solutions.",
   },
   {
-    imageSrc: assets.svgs.care,
+    imageSrc: careIcon,
     title: "Best Quality Pregnancy Care",
     description: "Providing safe and reliable care for mothers and babies.",
   },
   {
-    imageSrc: assets.svgs.equipment,
+    imageSrc: equipmentIcon,
     title: "Complete Medical Equipments",
     description: "Fully equipped with modern tools for accurate treatment.",
   },
   {
-    imageSrc: assets.svgs.call,
+    imageSrc: callIcon,
     title: "Dedicated Emergency Care",
     description: "24/7 emergency support with immediate response.",
   },
