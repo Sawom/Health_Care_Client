@@ -1,3 +1,5 @@
+"use client";
+
 import DashedLine from "@/components/UI/Doctor/DashedLine";
 import { Box, Chip, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
