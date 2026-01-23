@@ -105,21 +105,10 @@ const TopRatedDoctors = async () => {
           ))}
         </div>
 
-        <Box
-          sx={{
-            textAlign: "center",
-          }}
-        >
-          <Button
-            variant="outlined"
-            sx={{
-              marginTop: "20px",
-            }}
-            component={Link}
-            href="/doctors"
-          >
-            View ALL
-          </Button>
+        <Box sx={{ textAlign: "center" }}>
+          <Link href="/doctors" passHref>
+            <Button variant="outlined">View ALL Doctors</Button>
+          </Link>
         </Box>
       </Container>
     </section>

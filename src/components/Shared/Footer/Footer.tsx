@@ -1,3 +1,5 @@
+"use client";
+
 import facebookIcon from "@/assets/landing_page/facebook.png";
 import instagramIcon from "@/assets/landing_page/instagram.png";
 import linkedIcon from "@/assets/landing_page/linkedin.png";
@@ -19,9 +21,12 @@ const Footer = () => {
           flexWrap="wrap"
           textAlign="center"
         >
-          <Typography color="#fff" component={Link} href="/consultation">
-            Consultation
-          </Typography>
+          <Link
+            href="/consultation"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <Typography>Consultation</Typography>
+          </Link>
           <Typography color="#fff">Health Plans</Typography>
           <Typography color="#fff">Medicine</Typography>
           <Typography color="#fff">Diagnostics</Typography>
@@ -58,20 +63,15 @@ const Footer = () => {
             &copy;2024 Ph HealthCare. All Rights Reserved.
           </Typography>
 
-          <Typography
-            variant="h4"
-            component={Link}
-            href="/"
-            fontWeight={600}
-            color="white"
-            sx={{ textDecoration: "none" }}
-          >
-            A
-            <Box component="span" color="primary.main">
-              RS
-            </Box>
-            Health Care
-          </Typography>
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <Typography variant="h4" fontWeight={600} color="white">
+              A
+              <Box component="span" color="primary.main">
+                RS
+              </Box>
+              Health Care
+            </Typography>
+          </Link>
 
           <Typography component="p" color="white">
             Privacy Policy | Terms & Conditions

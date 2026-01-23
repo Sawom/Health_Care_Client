@@ -21,7 +21,7 @@ export default function Navbar() {
   // dynamic auth button
   const AuthButton = dynamic(
     () => import("@/components/UI/AuthButton/AuthButton"),
-    { ssr: false }
+    { ssr: false },
     // I use lazy loading concept. after received token this button will appear
   );
 
@@ -30,7 +30,7 @@ export default function Navbar() {
   const menuItems = [
     { label: "About Us", href: "/about" },
     { label: "Doctors", href: "/doctors" },
-    { label: "Medicine", href: "/medicine" },
+    // { label: "Medicine", href: "/medicine" },
     { label: "Dashboard", href: `/dashboard/${userInfo.role}` },
   ];
 
