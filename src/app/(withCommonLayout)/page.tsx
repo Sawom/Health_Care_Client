@@ -1,26 +1,28 @@
+"use client";
+
 import dynamic from "next/dynamic";
 
 const HeroSection = dynamic(
   () => import("@/components/UI/HomePage/HeroSection/HeroSection"),
-  { ssr: true },
+  { ssr: false },
 );
 const Specialist = dynamic(
   () => import("@/components/UI/HomePage/Specialist/Specialist"),
-  { ssr: true },
+  { ssr: false },
 );
 const TopRatedDoctors = dynamic(
   () => import("@/components/UI/HomePage/TopRatedDoctors/TopRatedDoctors"),
-  { ssr: true },
+  { ssr: false },
 );
 const WhyUs = dynamic(() => import("@/components/UI/HomePage/WhyUs/WhyUs"), {
-  ssr: true,
+  ssr: false,
 });
 const HowItWorks = dynamic(
   () => import("@/components/UI/HomePage/HowItWorks/HowItWorks"),
-  { ssr: true },
+  { ssr: false },
 );
 const Stats = dynamic(() => import("@/components/UI/HomePage/Stats/Stats"), {
-  ssr: true,
+  ssr: false,
 });
 
 const HomePage = () => {
