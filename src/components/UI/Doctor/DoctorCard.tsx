@@ -1,3 +1,5 @@
+"use client";
+
 import { Doctor } from "@/types/doctor";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Image from "next/image";
@@ -42,7 +44,7 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
                 ? "Specialties in" +
                   " " +
                   doctor?.doctorSpecialties?.map(
-                    (specialty) => specialty?.specialties?.title
+                    (specialty) => specialty?.specialties?.title,
                   )
                 : ""}
             </Typography>
@@ -108,9 +110,9 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
             </Typography>
           </Box>
           <Box>
-            <Button component={Link} href={`/doctors/${doctor.id}`}>
-              View Details
-            </Button>
+            <Link href={`/doctors/${doctor.id}`} passHref>
+              <Button variant="outlined">View Details</Button>
+            </Link>
           </Box>
         </Stack>
       </Stack>

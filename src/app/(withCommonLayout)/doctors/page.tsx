@@ -5,29 +5,39 @@ import { Doctor } from "@/types/doctor";
 import { Box, Container } from "@mui/material";
 
 interface PropType {
-  searchParams: { specialties: string };
+  searchParams: Promise<{ specialties: string }>;
 }
 
 const Doctors = async ({ searchParams }: PropType) => {
+  //  searchParams must with await
+  const params = await searchParams;
+  const specialties = params.specialties;
+
   let url = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctor`;
 
-  if (searchParams.specialties) {
-    url += `?specialties=${searchParams.specialties}`;
+  if (specialties) {
+    url += `?specialties=${specialties}`;
   }
 
-  const res = await fetch(url, {
-    cache: "no-store",
-  });
-
-  const { data } = await res.json();
+  // Safe Fetch
+  let data: Doctor[] = [];
+  try {
+    const res = await fetch(url, {
+      cache: "no-store",
+    });
+    const response = await res.json();
+    data = response?.data || [];
+  } catch (err) {
+    console.error("Fetch error during build:", err);
+  }
 
   return (
     <Container>
       <DashedLine />
-      <ScrollCategory specialties={searchParams.specialties} />
+      <ScrollCategory specialties={specialties} />
 
       <Box sx={{ mt: 2, p: 3, bgcolor: "secondary.light" }}>
-        {data?.length > 0 ? (
+        {data.length > 0 ? (
           data.map((doctor: Doctor, index: number) => (
             <Box key={doctor.id}>
               <DoctorCard doctor={doctor} />
@@ -35,7 +45,9 @@ const Doctors = async ({ searchParams }: PropType) => {
             </Box>
           ))
         ) : (
-          <Box>No Doctor Found With This Specialty</Box>
+          <Box sx={{ textAlign: "center", py: 5 }}>
+            No Doctor Found With This Specialty
+          </Box>
         )}
       </Box>
     </Container>

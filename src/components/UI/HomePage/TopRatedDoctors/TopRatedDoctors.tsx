@@ -19,7 +19,9 @@ const TopRatedDoctors = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctor?page=1&limit=3`,
   );
-  const { data: doctors } = await res.json();
+  // safety check for build
+  const response = await res.json();
+  const doctors = response?.data || [];
   //   console.log(doctors);
   return (
     <section
@@ -91,20 +93,16 @@ const TopRatedDoctors = async () => {
                   <Link href={`/doctors/${doctor?.id}`}>
                     <Button>Book Now</Button>
                   </Link>
-                  <Button
-                    variant="outlined"
-                    component={Link}
-                    href={`/doctors/${doctor.id}`}
-                  >
-                    View Profile
-                  </Button>
+                  <Link href={`/doctors/${doctor.id}`} passHref>
+                    <Button variant="outlined">View Profile</Button>
+                  </Link>
                 </CardActions>
               </Card>
             </div>
           ))}
         </div>
 
-        <Box sx={{ textAlign: "center" }}>
+        <Box sx={{ textAlign: "center", mt: 4 }}>
           <Link href="/doctors" passHref>
             <Button variant="outlined">View ALL Doctors</Button>
           </Link>

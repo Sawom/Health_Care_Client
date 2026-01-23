@@ -8,10 +8,14 @@ const Specialist = async () => {
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/specialties`,
     {
       next: {
-        revalidate: 30, // update content after 30s automatically if changes
+        revalidate: 30,
       },
     },
   );
+
+  if (!res.ok) {
+    return null;
+  }
 
   const { data: specialties } = await res.json();
   //   console.log(specialties);
@@ -56,60 +60,67 @@ const Specialist = async () => {
           alignItems="center"
         >
           {specialties.slice(0, 6).map((specialty: any) => (
-            <Box
+            /* Link দিয়ে wrap করা হয়েছে যাতে location error না আসে */
+            <Link
               key={specialty.id}
-              sx={{
-                flex: { xs: "1 1 100%", sm: "1 1 150px" }, //  Mobile: full width, Desktop: fixed width
-                maxWidth: "150px",
-                backgroundColor: "rgba(245, 245, 245,1)",
-                border: "1px solid rgba(250, 250, 250, 1)",
-                borderRadius: "10px",
-                textAlign: "center",
-                p: { xs: 3, md: "40px 10px" }, //  Mobile padding smaller
-                "& img": {
-                  width: { xs: "40px", md: "50px" }, //  Mobile image smaller
-                  height: { xs: "40px", md: "50px" }, //  Mobile image smaller
-                  margin: "0 auto",
-                },
-                "&:hover": {
-                  border: "1px solid rgba(36, 153, 239, 1)",
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                  transition: "all 0.5s",
-                },
-              }}
-              component={Link}
               href={`/doctors?specialties=${specialty.title}`}
+              style={{ textDecoration: "none" }}
             >
-              <Image
-                src={specialty.icon}
-                width={100}
-                height={100}
-                alt="specialty icon"
-              />
-              <Box>
-                <Typography
-                  component="p"
-                  fontWeight={600}
-                  fontSize={{ xs: 16, md: 18 }} //  Mobile font smaller
-                  mt={2}
-                >
-                  {specialty.title}
-                </Typography>
+              <Box
+                sx={{
+                  flex: { xs: "1 1 100%", sm: "1 1 150px" }, //  Mobile: full width, Desktop: fixed width
+                  width: "150px", // Fixed width added for consistency
+                  backgroundColor: "rgba(245, 245, 245,1)",
+                  border: "1px solid rgba(250, 250, 250, 1)",
+                  borderRadius: "10px",
+                  textAlign: "center",
+                  p: { xs: 3, md: "40px 10px" }, //  Mobile padding smaller
+                  "& img": {
+                    width: { xs: "40px", md: "50px" }, //  Mobile image smaller
+                    height: { xs: "40px", md: "50px" }, //  Mobile image smaller
+                    margin: "0 auto",
+                  },
+                  "&:hover": {
+                    border: "1px solid rgba(36, 153, 239, 1)",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    transition: "all 0.5s",
+                  },
+                }}
+              >
+                <Image
+                  src={specialty.icon}
+                  width={100}
+                  height={100}
+                  alt="specialty icon"
+                />
+                <Box>
+                  <Typography
+                    component="p"
+                    fontWeight={600}
+                    fontSize={{ xs: 16, md: 18 }} //  Mobile font smaller
+                    mt={2}
+                    color="black" // Text color explicitly set
+                  >
+                    {specialty.title}
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
+            </Link>
           ))}
         </Stack>
 
         {/* View All Button */}
-        <Button
-          variant="outlined"
-          sx={{
-            mt: 3, //  Mobile margin top
-          }}
-        >
-          View ALL
-        </Button>
+        <Link href="/doctors" passHref>
+          <Button
+            variant="outlined"
+            sx={{
+              mt: 3, //  Mobile margin top
+            }}
+          >
+            View ALL
+          </Button>
+        </Link>
       </Box>
     </Container>
   );
