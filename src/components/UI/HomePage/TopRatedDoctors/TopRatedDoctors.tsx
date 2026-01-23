@@ -1,5 +1,4 @@
 // fetched only three doctor's data
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
   Box,
   Button,
@@ -79,7 +78,7 @@ const TopRatedDoctors = async () => {
                     {doctor.qualification}, {doctor.designation}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" mt={1}>
-                    <LocationOnIcon /> {doctor.address}
+                    {doctor.address}
                   </Typography>
                 </CardContent>
                 <CardActions
