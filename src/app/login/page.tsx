@@ -68,7 +68,14 @@ const LoginPage = () => {
             }}
           >
             <Box>
-              <Image src={assets.svgs.logo} width={50} height={50} alt="logo" />
+              <Link href="/">
+                <Image
+                  src={assets.svgs.logo}
+                  width={50}
+                  height={50}
+                  alt="logo"
+                />
+              </Link>
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
@@ -153,6 +160,17 @@ const LoginPage = () => {
                 Don&apos;t have an account?
                 <Link href="/register" className="underline mx-3 ">
                   Create an account
+                </Link>
+              </Typography>
+
+              <Typography
+                component="p"
+                fontWeight={300}
+                fontSize={{ xs: "0.9rem", md: "1rem" }}
+              >
+                back to
+                <Link href="/" className="underline mx-3 ">
+                  Homepage
                 </Link>
               </Typography>
             </RForm>
