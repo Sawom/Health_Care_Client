@@ -1,4 +1,3 @@
-// fetched only three doctor's data
 import {
   Box,
   Button,
