@@ -4,22 +4,36 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const Specialist = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/specialties`,
-    {
-      next: {
-        revalidate: 30,
-      },
-    },
-  );
+const Specialist = () => {
+  const [specialties, setSpecialties] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  if (!res.ok) {
-    return null;
-  }
+  // console.log(process.env.NEXT_PUBLIC_BACKEND_API_URL);
 
-  const { data: specialties } = await res.json();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/specialties`,
+          {
+            credentials: "include",
+          },
+        );
+        const data = await res.json();
+        setSpecialties(data.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (!specialties.length) return null;
   //   console.log(specialties);
   return (
     <Container>

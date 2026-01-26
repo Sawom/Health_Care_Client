@@ -4,14 +4,19 @@ import DashedLine from "@/components/UI/Doctor/DashedLine";
 import DoctorCard from "@/components/UI/Doctor/DoctorCard";
 import ScrollCategory from "@/components/UI/Doctor/ScrollCategory";
 import { Doctor } from "@/types/doctor";
-import { Box, CircularProgress, Container, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
-interface PropType {
-  searchParams: { specialties?: string };
-}
+const DoctorsPage = () => {
+  const searchParams = useSearchParams();
+  const specialties = searchParams.get("specialties") || "";
 
-const DoctorsPage = ({ searchParams }: PropType) => {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,9 +25,9 @@ const DoctorsPage = ({ searchParams }: PropType) => {
       setLoading(true);
       try {
         let url = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctor`;
-        // specialties চেক করে URL বানানো
-        if (searchParams?.specialties) {
-          url += `?specialties=${searchParams.specialties}`;
+
+        if (specialties) {
+          url += `?specialties=${encodeURIComponent(specialties)}`;
         }
 
         const res = await fetch(url, { cache: "no-store" });
@@ -37,12 +42,13 @@ const DoctorsPage = ({ searchParams }: PropType) => {
     };
 
     fetchDoctors();
-  }, [searchParams?.specialties]); // স্পেশালিটি চেঞ্জ হলে ডাটা আবার আসবে
+  }, [specialties]);
 
   return (
     <Container>
       <DashedLine />
-      <ScrollCategory specialties={searchParams?.specialties || ""} />
+
+      <ScrollCategory specialties={specialties} />
 
       <Box sx={{ mt: 2, p: 3, bgcolor: "secondary.light", borderRadius: 1 }}>
         {loading ? (
