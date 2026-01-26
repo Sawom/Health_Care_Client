@@ -1,11 +1,10 @@
-// ১. "use client" সরিয়ে দিলাম যাতে কোনো পেইন না থাকে
 import DashedLine from "@/components/UI/Doctor/DashedLine";
 import { Box, Chip, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import DoctorScheduleSlots from "../components/DoctorScheduleSlots";
 
 type PropTypes = {
-  params: Promise<{ id: string }>; // ২. টাইপটা প্রমিজ হিসেবে দিলাম
+  params: Promise<{ id: string }>; // type as a promise
 };
 
 const InfoBoxStyles = {
@@ -18,13 +17,13 @@ const InfoBoxStyles = {
 };
 
 const DoctorsProfilePage = async ({ params }: PropTypes) => {
-  // ৩. নেক্সট ১৫ এর নিয়ম অনুযায়ী params কে await করলাম
+  // next js 15 wise params k await korchi
   const { id } = await params;
 
   const placeholder =
     "https://static.vecteezy.com/system/resources/thumbnails/026/489/224/small_2x/muslim-malay-woman-doctor-in-hospital-with-copy-space-ai-generated-photo.jpg";
 
-  // ৪. সার্ভার সাইড ফেচিং
+  // server side fetching
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctor/${id}`,
     {

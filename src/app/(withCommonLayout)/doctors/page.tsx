@@ -6,7 +6,7 @@ import ScrollCategory from "@/components/UI/Doctor/ScrollCategory";
 import { Doctor } from "@/types/doctor";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react"; 
+import { Suspense, useEffect, useState } from "react";
 
 // logic part in component
 const DoctorsList = () => {
@@ -58,7 +58,7 @@ const DoctorsList = () => {
   );
 };
 
-// main page component which is handled by Suspense হ্যান্ডেল করবে
+// main page component which is handled by Suspense
 const DoctorsPage = () => {
   return (
     <Container>

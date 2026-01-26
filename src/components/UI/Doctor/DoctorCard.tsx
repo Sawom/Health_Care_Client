@@ -140,7 +140,6 @@ const DoctorCard = ({ doctor }: { doctor: Doctor }) => {
             </Typography>
           </Box>
 
-          {/* বাটন দুটি সব সময় পাশাপাশি থাকবে এবং সমান জায়গা নেবে */}
           <Stack direction="row" gap={1.5} sx={{ width: "100%" }}>
             <Link href={`/doctors/${doctor.id}`} passHref style={{ flex: 1 }}>
               <Button variant="outlined" fullWidth size="small" sx={{ py: 1 }}>
