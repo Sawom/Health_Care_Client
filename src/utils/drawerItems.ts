@@ -39,7 +39,7 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           title: "Manage Users",
           path: `${role}/manage-users`,
           icon: GroupIcon,
-        }
+        },
       );
       break;
 
@@ -74,7 +74,7 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           title: "Reviews",
           path: `${role}/reviews`,
           icon: ReviewsIcon,
-        }
+        },
       );
       break;
 
@@ -94,28 +94,16 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           title: "Appointments",
           path: `${role}/appointment`,
           icon: CalendarMonthIcon,
-        }
+        },
       );
       break;
 
     case USER_ROLE.PATIENT:
-      roleMenus.push(
-        {
-          title: "Appointments",
-          path: `${role}/appointments`,
-          icon: DashboardIcon,
-        },
-        {
-          title: "Prescriptions",
-          path: `${role}/prescriptions`,
-          icon: DashboardIcon,
-        },
-        {
-          title: "Payment History",
-          path: `${role}/payment-history`,
-          icon: DashboardIcon,
-        }
-      );
+      roleMenus.push({
+        title: "Appointments",
+        path: `${role}/appointments`,
+        icon: DashboardIcon,
+      });
       break;
 
     default:
