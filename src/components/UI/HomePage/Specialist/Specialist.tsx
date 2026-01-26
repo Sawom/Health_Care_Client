@@ -1,3 +1,5 @@
+"use client";
+
 // fetched specialist data
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";

@@ -4,25 +4,25 @@ import dynamic from "next/dynamic";
 
 const HeroSection = dynamic(
   () => import("@/components/UI/HomePage/HeroSection/HeroSection"),
-  { ssr: false },
+  { ssr: true },
 );
 const Specialist = dynamic(
   () => import("@/components/UI/HomePage/Specialist/Specialist"),
-  { ssr: false },
+  { ssr: true },
 );
 const TopRatedDoctors = dynamic(
   () => import("@/components/UI/HomePage/TopRatedDoctors/TopRatedDoctors"),
-  { ssr: false },
+  { ssr: true },
 );
 const WhyUs = dynamic(() => import("@/components/UI/HomePage/WhyUs/WhyUs"), {
-  ssr: false,
+  ssr: true,
 });
 const HowItWorks = dynamic(
   () => import("@/components/UI/HomePage/HowItWorks/HowItWorks"),
-  { ssr: false },
+  { ssr: true },
 );
 const Stats = dynamic(() => import("@/components/UI/HomePage/Stats/Stats"), {
-  ssr: false,
+  ssr: true,
 });
 
 const HomePage = () => {
