@@ -4,16 +4,11 @@ import DashedLine from "@/components/UI/Doctor/DashedLine";
 import DoctorCard from "@/components/UI/Doctor/DoctorCard";
 import ScrollCategory from "@/components/UI/Doctor/ScrollCategory";
 import { Doctor } from "@/types/doctor";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Typography,
-} from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const DoctorsPage = () => {
+const DoctorsClient = () => {
   const searchParams = useSearchParams();
   const specialties = searchParams.get("specialties") || "";
 
@@ -25,16 +20,15 @@ const DoctorsPage = () => {
       setLoading(true);
       try {
         let url = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/doctor`;
-
         if (specialties) {
           url += `?specialties=${encodeURIComponent(specialties)}`;
         }
 
         const res = await fetch(url, { cache: "no-store" });
-        const response = await res.json();
-        setDoctors(response?.data || []);
-      } catch (error) {
-        console.error("Error fetching doctors:", error);
+        const data = await res.json();
+        setDoctors(data?.data || []);
+      } catch (err) {
+        console.error(err);
         setDoctors([]);
       } finally {
         setLoading(false);
@@ -47,7 +41,6 @@ const DoctorsPage = () => {
   return (
     <Container>
       <DashedLine />
-
       <ScrollCategory specialties={specialties} />
 
       <Box sx={{ mt: 2, p: 3, bgcolor: "secondary.light", borderRadius: 1 }}>
@@ -55,30 +48,21 @@ const DoctorsPage = () => {
           <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
             <CircularProgress />
           </Box>
-        ) : doctors.length > 0 ? (
-          doctors.map((doctor: Doctor, index: number) => (
+        ) : doctors.length ? (
+          doctors.map((doctor, index) => (
             <Box key={doctor.id}>
               <DoctorCard doctor={doctor} />
-              {index === doctors.length - 1 ? null : <DashedLine />}
+              {index !== doctors.length - 1 && <DashedLine />}
             </Box>
           ))
         ) : (
-          <Box
-            sx={{
-              textAlign: "center",
-              py: 10,
-              bgcolor: "white",
-              borderRadius: 1,
-            }}
-          >
-            <Typography variant="h6" color="text.secondary">
-              No Doctor Found With This Specialty
-            </Typography>
-          </Box>
+          <Typography align="center" py={10}>
+            No Doctor Found With This Specialty
+          </Typography>
         )}
       </Box>
     </Container>
   );
 };
 
-export default DoctorsPage;
+export default DoctorsClient;
