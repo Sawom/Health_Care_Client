@@ -1,14 +1,14 @@
 "use client";
 
-import { Box, Button, Container, Typography } from "@mui/material";
-import Image from "next/image";
-
 import doctor1 from "@/assets/images/doctor1.png";
 import doctor2 from "@/assets/images/doctor2.png";
 import doctor3 from "@/assets/images/doctor3.png";
 import stethoscope from "@/assets/images/Stetoscope.png";
 import arrow from "@/assets/svgs/arrow.svg";
 import gridSvg from "@/assets/svgs/grid.svg";
+import { Box, Button, Container, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -71,8 +71,9 @@ const HeroSection = () => {
 
         {/* Buttons */}
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-          <Button variant="contained">Make appointment</Button>
-          <Button variant="outlined">Contact us</Button>
+          <Link href="/about" passHref>
+            <Button variant="outlined">Contact us</Button>
+          </Link>
         </Box>
       </Box>
 

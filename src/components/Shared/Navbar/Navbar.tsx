@@ -31,7 +31,7 @@ export default function Navbar() {
     { label: "About Us", href: "/about" },
     { label: "Doctors", href: "/doctors" },
     // { label: "Medicine", href: "/medicine" },
-    { label: "Dashboard", href: `/dashboard/${userInfo.role}` },
+    { label: "Dashboard", href: `/dashboard/${userInfo.role}/profile` },
   ];
 
   return (
