@@ -20,18 +20,16 @@ The platform is built with a modern tech stack for high performance and scalabil
 ### 1. Admin
 * **Account Management:** Create and manage doctor accounts.
 * **Appointment Management:** Define schedule slots and manage the status of appointments.
-* **Information Access:** View full appointment histories, manage doctor profiles, and access system metadata.
+* **Information Access:** View full appointment histories, manage doctor profiles.
 
 ### 2. Doctor
 * **Appointment Management:** View upcoming schedules, set availability slots, and take appointments.
-* **Patient Profiles:** Access medical history, view uploaded diagnostic reports, and check previous prescriptions.
-* **Prescription Management:** Generate digital prescriptions during/after consultations, attach medical notes, and send them directly via email.
+* **Patient Profiles:** Access medical history, view uploaded diagnostic reports.
 
 ### 3. Patient
 * **Account Management:** Easy registration, password recovery, and secure account settings.
 * **Appointment Booking:** Schedule appointments with specific doctors based on available time slots.
 * **Medical Record Management:** Maintain a personal medical history and upload diagnostic test reports.
-* **Prescription Access:** View and receive prescriptions through the platform and via email.
 * **Payment & Confirmation:** Secure fee payment during booking. This features is impliment fr 
     > **Note:** Appointments are confirmed only after payment. If payment is not made within 30 minutes, the booking is automatically canceled.
 * **Reviews:** Provide ratings and comments for doctors and manage previous reviews.
@@ -41,8 +39,8 @@ The platform is built with a modern tech stack for high performance and scalabil
 ## System Features
 * **Real-time Communication:** Seamless video consultations through WebRTC.
 * **Security:** Robust user authentication and role-based authorization.
-* **Automated Notifications:** Email triggers for appointment confirmations, invoices, and prescription delivery.
 * **Seamless Payments:** Integrated payment gateway for secure consultation fee transactions.
+* **Payment:** SSL ssl commerz for payment gateway system.
 
 ---
 
@@ -55,4 +53,4 @@ ARS HealthCare is architected as a **Single-Page Application (SPA)** with **Serv
 * **Communication Layer:** Real-time sessions are powered by Agora.io, ensuring low-latency video streaming without taxing the primary application server.
 * **Reliability:** The system includes automated logic to handle session timeouts (e.g., the 30-minute payment rule) to maintain high availability of appointment slots.
 
-Live site: https://healthcare-client-theta.vercel.app
+* **Live site:** https://healthcare-client-theta.vercel.app
