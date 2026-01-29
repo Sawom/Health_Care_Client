@@ -4,7 +4,7 @@
 
 ---
 
-## 🛠️ Technologies
+## Technologies
 The platform is built with a modern tech stack for high performance and scalability:
 
 * **Frontend:** Next.js, Redux.
@@ -15,7 +15,7 @@ The platform is built with a modern tech stack for high performance and scalabil
 
 ---
 
-## 👥 User Roles & Functionalities
+## User Roles & Functionalities
 
 ### 1. Admin
 * **Account Management:** Create and manage doctor accounts.
@@ -38,7 +38,7 @@ The platform is built with a modern tech stack for high performance and scalabil
 
 ---
 
-## 🌟 System Features
+## System Features
 * **Real-time Communication:** Seamless video consultations through WebRTC.
 * **Security:** Robust user authentication and role-based authorization.
 * **Automated Notifications:** Email triggers for appointment confirmations, invoices, and prescription delivery.
@@ -46,7 +46,7 @@ The platform is built with a modern tech stack for high performance and scalabil
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 ARS HealthCare is architected as a **Single-Page Application (SPA)** with **Server-Side Rendering (SSR)** to balance performance and SEO.
 
