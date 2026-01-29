@@ -1,6 +1,6 @@
 ## ARS HealthCare
 
-**ARS HealthCare** is a robust and comprehensive healthcare management system designed to streamline communication and appointment processes between patients, doctors, and administrators. The system incorporates cutting-edge technologies to ensure efficient and secure healthcare delivery.
+**ARS HealthCare** is a full stack, robust and comprehensive healthcare management system designed to streamline communication and appointment processes between patients, doctors, and administrators. The system incorporates cutting-edge technologies to ensure efficient and secure healthcare delivery.
 
 ---
 
@@ -54,3 +54,5 @@ ARS HealthCare is architected as a **Single-Page Application (SPA)** with **Serv
 * **Backend Logic:** An Express-based REST API handles the business logic, while Prisma ORM ensures type-safe interactions with the PostgreSQL database.
 * **Communication Layer:** Real-time sessions are powered by Agora.io, ensuring low-latency video streaming without taxing the primary application server.
 * **Reliability:** The system includes automated logic to handle session timeouts (e.g., the 30-minute payment rule) to maintain high availability of appointment slots.
+
+Live site: https://healthcare-client-theta.vercel.app
