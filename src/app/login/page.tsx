@@ -2,6 +2,7 @@
 import assets from "@/assets";
 import RForm from "@/components/Forms/RForm";
 import Rinput from "@/components/Forms/Rinput";
+import { useUserLoginMutation } from "@/redux/api/authApi";
 import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.services";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +17,7 @@ import { z } from "zod";
 
 export const validationSchema = z.object({
   email: z.string().email("Please enter a valid email address!"),
-  password: z.string().min(6, "Must be at least 6 characters"),
+  password: z.string().min(5, "Must be at least 5 characters"),
 });
 
 const LoginPage = () => {
@@ -27,6 +28,9 @@ const LoginPage = () => {
     // console.log(values);
     try {
       const res = await userLogin(values);
+
+      console.log("Unwrapped Response:", res);
+
       if (res?.data?.accessToken) {
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
@@ -36,7 +40,10 @@ const LoginPage = () => {
         // console.log(res);
       }
     } catch (err: any) {
-      console.error(err.message);
+      const errMsg = err?.message || "Something went wrong!";
+      toast.error(errMsg);
+      console.error(errMsg);
+      setError(errMsg);
     }
   };
 
