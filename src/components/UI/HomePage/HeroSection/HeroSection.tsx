@@ -65,8 +65,10 @@ const HeroSection = () => {
 
         {/* Paragraph */}
         <Typography sx={{ my: 4, fontSize: { xs: "0.9rem", md: "1rem" } }}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit eum
-          iusto consequatur eius, doloribus nesciunt facere aliquid eveniet et.
+          Clinical excellence must be the priority for any health care service
+          provider. ARS Hospital ensures the best healthcare service comprise
+          of professional (clinical) service excellence with outstanding
+          personal service.
         </Typography>
 
         {/* Buttons */}
