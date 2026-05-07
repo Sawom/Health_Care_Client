@@ -1,9 +1,10 @@
 // reusable input component
-// by  render={({ field, fieldState: { error } } in controller dictructure all fields and received by the text fiel. skip register and add name. 
+// by  render={({ field, fieldState: { error } } in controller dictructure all fields and received by the text fiel. skip register and add name.
 // name is the key that stores the input value in React Hook Form. Without name, the form won’t know which field the value belongs to.
-
-import { SxProps, TextField } from "@mui/material";
+import { useState } from "react";
+import { IconButton, InputAdornment, SxProps, TextField } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
 
 type TInputProps = {
   name: string;
@@ -26,6 +27,13 @@ const Rinput = ({
   required,
 }: TInputProps) => {
   const { control } = useFormContext();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
   return (
     <Controller
       control={control}
@@ -35,7 +43,9 @@ const Rinput = ({
           {...field}
           sx={{ ...sx }}
           label={label}
-          type={type}
+          type={
+            type === "password" ? (showPassword ? "text" : "password") : type
+          }
           variant="outlined"
           size={size}
           fullWidth={fullWidth}
@@ -43,6 +53,23 @@ const Rinput = ({
           required={required}
           error={!!error?.message}
           helperText={error?.message}
+          InputProps={
+            type === "password"
+              ? {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }
+              : undefined
+          }
         />
       )}
     />
