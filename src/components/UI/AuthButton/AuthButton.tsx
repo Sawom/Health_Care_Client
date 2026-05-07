@@ -13,7 +13,9 @@ const AuthButton = () => {
 
   const handleLogOut = () => {
     logoutUser(router);
+    window.location.href = "/";
   };
+
   return (
     <>
       {userInfo?.email ? (

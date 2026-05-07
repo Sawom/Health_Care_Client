@@ -30,8 +30,6 @@ export default function Navbar() {
   const menuItems = [
     { label: "About Us", href: "/about" },
     { label: "Doctors", href: "/doctors" },
-    // { label: "Medicine", href: "/medicine" },
-    { label: "Dashboard", href: `/dashboard/${userInfo.role}/profile` },
   ];
 
   return (
@@ -79,8 +77,8 @@ export default function Navbar() {
               {item.label}
             </Typography>
           ))}
-          {/* dasshboard */}
-          {userInfo?.userId ? (
+          {/* dashboard */}
+          {userInfo?.email ? (
             <Typography component={Link} href="/dashboard">
               Dashboard
             </Typography>
@@ -146,7 +144,7 @@ export default function Navbar() {
           ))}
 
           {/* dashboard  */}
-          {userInfo?.userId ? (
+          {userInfo?.email ? (
             <Typography component={Link} href="/dashboard">
               Dashboard
             </Typography>
