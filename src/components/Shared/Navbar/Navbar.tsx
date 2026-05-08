@@ -27,7 +27,7 @@ export default function Navbar() {
   );
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  // const [isScrolled, setIsScrolled] = useState(false);
 
   // useEffect(() => {
   //   const handleScroll = () => {

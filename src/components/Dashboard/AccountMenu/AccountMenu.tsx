@@ -1,5 +1,3 @@
-import { baseApi } from "@/redux/api/baseApi";
-import { useAppDispatch } from "@/redux/hook";
 import { logoutUser } from "@/services/actions/logoutUser";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Logout from "@mui/icons-material/Logout";
@@ -45,9 +43,6 @@ export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const router = useRouter();
-
-  const dispatch = useAppDispatch();
-
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -55,12 +50,10 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const handleLogout = () => {
-    dispatch(baseApi.util.resetApiState());
     setAnchorEl(null);
     logoutUser(router);
-    window.location.href = "/";
+    window.location.assign("/login");
   };
 
   return (
