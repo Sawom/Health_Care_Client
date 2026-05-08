@@ -30,11 +30,9 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  if (
-    accessToken &&
-    (commonPrivateRoutes.includes(pathname) ||
-      commonPrivateRoutes.some((route) => pathname.startsWith(route)))
-  ) {
+  const isCommonRoute = commonPrivateRoutes.includes(pathname);
+
+  if (accessToken && isCommonRoute) {
     return NextResponse.next();
   }
 
@@ -52,7 +50,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
   }
-
+  console.log("Redirecting to Home from Path:", pathname);
   return NextResponse.redirect(new URL("/", request.url));
 }
 

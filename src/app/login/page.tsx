@@ -5,6 +5,7 @@ import Rinput from "@/components/Forms/Rinput";
 import { useUserLoginMutation } from "@/redux/api/authApi";
 import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/auth.services";
+import { decodedToken } from "@/utils/jwt";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
@@ -34,7 +35,18 @@ const LoginPage = () => {
       if (res?.data?.accessToken) {
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        router.push("/dashboard");
+        const userData: any = decodedToken(res?.data?.accessToken);
+        console.log("userData: ", userData);
+
+        const role = userData?.role;
+
+        if (role) {
+          const formattedRole = role.toLowerCase().replace("_", "-");
+          router.refresh();
+          setTimeout(() => {
+            router.push(`/dashboard/${formattedRole}/profile`);
+          }, 200);
+        }
       } else {
         setError(res.message);
         // console.log(res);
