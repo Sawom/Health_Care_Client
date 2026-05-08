@@ -1,7 +1,6 @@
 import { logoutUser } from "@/services/actions/logoutUser";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Logout from "@mui/icons-material/Logout";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -99,11 +98,6 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
-          <Avatar sx={{ background: "transparent", color: "primary.main" }} />
-          Profile
-        </MenuItem>
-
         <Divider />
 
         <MenuItem onClick={handleLogout}>
