@@ -29,7 +29,7 @@ const Profile = () => {
   };
 
   if (isLoading) {
-    <p>Loading...</p>;
+    return <p>Loading...</p>;
   }
 
   return (
@@ -53,7 +53,16 @@ const Profile = () => {
             <Image
               height={300}
               width={400}
-              src={data?.profilePhoto}
+              src={
+                data?.profilePhoto && data.profilePhoto.length > 0
+                  ? data.profilePhoto
+                  : "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+              }
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
               alt="User Photo"
             />
           </Box>

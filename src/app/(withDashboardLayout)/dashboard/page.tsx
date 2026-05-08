@@ -18,11 +18,7 @@ const DashboardHomePage = () => {
     }
   }, [userInfo, router]);
 
-  return (
-    <div className="flex justify-center items-center min-h-[60vh]">
-      <h1 className="text-2xl font-semibold">Redirecting to your profile...</h1>
-    </div>
-  );
+  return null;
 };
 
 export default DashboardHomePage;

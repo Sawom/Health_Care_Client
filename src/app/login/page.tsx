@@ -42,10 +42,12 @@ const LoginPage = () => {
 
         if (role) {
           const formattedRole = role.toLowerCase().replace("_", "-");
+          const targetPath = `/dashboard/${formattedRole}/profile`;
+          router.replace(targetPath);
           router.refresh();
-          setTimeout(() => {
-            router.push(`/dashboard/${formattedRole}/profile`);
-          }, 200);
+          // setTimeout(() => {
+          //   router.push(`/dashboard/${formattedRole}/profile`);
+          // }, 200);
         }
       } else {
         setError(res.message);
