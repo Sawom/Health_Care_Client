@@ -7,30 +7,47 @@ import {
 } from "@/redux/api/myProfile";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { Box, Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import PatientInformation from "./components/PatientInformation";
 import PatientProfileUpdateModal from "./components/PatientProfileUpdateModal";
+import { toast } from "sonner";
 
 const PatientProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, isLoading } = useGetMYProfileQuery(undefined);
+  const { data, isLoading, refetch } = useGetMYProfileQuery(undefined);
   const [updateMYProfile, { isLoading: updating }] =
     useUpdateMYProfileMutation();
 
-  const fileUploadHandler = (file: File) => {
+  const fileUploadHandler = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("data", JSON.stringify({}));
 
-    updateMYProfile(formData);
+    // updateMYProfile(formData);
+    try {
+      // ২. মিউটেশন কল এবং unwrap ব্যবহার
+      const res = await updateMYProfile(formData).unwrap();
+      if (res) {
+        toast.success("Profile photo updated successfully!");
+        refetch(); // ৩. ছবি পাল্টানোর সাথে সাথে UI আপডেট করবে
+      }
+    } catch (err: any) {
+      toast.error(err?.message || err?.data?.message || "Upload failed");
+      console.error("Upload error:", err);
+    }
   };
 
   if (isLoading) {
-    <p>Loading...</p>;
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+        <CircularProgress />
+      </Box>
+    );
   }
+
   return (
     <>
       <PatientProfileUpdateModal

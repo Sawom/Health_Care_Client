@@ -38,12 +38,13 @@ export const axiosBaseQuery =
         },
       });
       return result;
-    } catch (axiosError) {
+    } catch (axiosError: any) {
       const err = axiosError as AxiosError;
       return {
         error: {
-          status: err.response?.status,
-          data: err.response?.data || err.message,
+          status: axiosError.response?.status,
+          // ডাটা না থাকলে মেসেজ পাঠাও
+          data: axiosError.response?.data || { message: axiosError.message },
         },
       };
     }

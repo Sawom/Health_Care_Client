@@ -35,7 +35,7 @@ const AdminProfile = () => {
         refetch(); // ৩. ছবি পাল্টানোর সাথে সাথে UI আপডেট করবে
       }
     } catch (err: any) {
-      toast.error(err?.data?.message || "Upload failed");
+      toast.error(err?.message || err?.data?.message || "Upload failed");
       console.error("Upload error:", err);
     }
   };

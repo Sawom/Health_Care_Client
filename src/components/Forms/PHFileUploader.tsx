@@ -27,15 +27,16 @@ export default function PHFileUploader({ name, label, sx }: TProps) {
             startIcon={<CloudUploadIcon />}
             sx={{ ...sx }}
           >
-            {label || "Upload file"}
-            <Input
-              {...field}
-              type={name}
-              value={value?.fileName}
-              onChange={(e) =>
-                onChange((e?.target as HTMLInputElement).files?.[0])
-              }
+            {value ? (value as File).name : label || "Upload file"}
+            <input
+              type="file" // টাইপ ফিক্সড 'file' হবে
               style={{ display: "none" }}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  onChange(file); // ফাইল অবজেক্টটি সরাসরি react-hook-form এ পাঠাবে
+                }
+              }}
             />
           </Button>
         );

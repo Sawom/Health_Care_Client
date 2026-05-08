@@ -1,4 +1,6 @@
 "use client";
+import { baseApi } from "@/redux/api/baseApi";
+import { useAppDispatch } from "@/redux/hook";
 import { logoutUser } from "@/services/actions/logoutUser";
 import { getUserInfo } from "@/services/auth.services";
 import { Button } from "@mui/material";
@@ -10,8 +12,10 @@ const AuthButton = () => {
   const userInfo = getUserInfo();
   // console.log(userInfo);
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleLogOut = () => {
+    dispatch(baseApi.util.resetApiState());
     logoutUser(router);
     window.location.href = "/";
   };

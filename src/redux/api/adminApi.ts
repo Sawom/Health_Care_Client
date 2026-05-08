@@ -10,7 +10,7 @@ export const adminApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: "/user/create-admin",
         method: "POST",
-        contentType: "multipart/form-data",
+        // contentType: "multipart/form-data",
         data,
       }),
       invalidatesTags: [tagTypes.admin],
