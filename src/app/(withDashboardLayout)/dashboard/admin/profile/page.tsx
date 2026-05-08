@@ -7,30 +7,51 @@ import {
 } from "@/redux/api/myProfile";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { Box, Button } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 import AdminInformation from "./components/AdminInformation";
 import AdminProfileUpdateModal from "./components/AdminProfileUpdateModal";
+import { toast } from "sonner";
 
 const AdminProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data, isLoading } = useGetMYProfileQuery(undefined);
+  const { data, isLoading, refetch } = useGetMYProfileQuery(undefined);
   const [updateMYProfile, { isLoading: updating }] =
     useUpdateMYProfileMutation();
 
-  const fileUploadHandler = (file: File) => {
+  const fileUploadHandler = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("data", JSON.stringify({}));
 
-    updateMYProfile(formData);
+    // updateMYProfile(formData);
+    try {
+      // ২. মিউটেশন কল এবং unwrap ব্যবহার
+      const res = await updateMYProfile(formData).unwrap();
+      if (res) {
+        toast.success("Profile photo updated successfully!");
+        refetch(); // ৩. ছবি পাল্টানোর সাথে সাথে UI আপডেট করবে
+      }
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Upload failed");
+      console.error("Upload error:", err);
+    }
   };
 
   if (isLoading) {
-    <p>Loading...</p>;
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
+        <CircularProgress />
+      </Box>
+    );
   }
+
+  const profilePhoto =
+    data?.profilePhoto && data.profilePhoto !== ""
+      ? data.profilePhoto
+      : "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
 
   return (
     <>
@@ -47,13 +68,19 @@ const AdminProfile = () => {
               width: "100%",
               overflow: "hidden",
               borderRadius: 1,
+              position: "relative",
             }}
           >
             <Image
               height={300}
               width={400}
-              src={data?.profilePhoto}
+              src={profilePhoto}
               alt="User Photo"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
             />
           </Box>
           <Box my={3}>

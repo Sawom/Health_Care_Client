@@ -6,7 +6,7 @@ import { instance as axiosInstance } from "./axiosInstance";
 
 export const axiosBaseQuery =
   (
-    { baseUrl }: { baseUrl: string } = { baseUrl: "" }
+    { baseUrl }: { baseUrl: string } = { baseUrl: "" },
   ): BaseQueryFn<
     {
       url: string;
@@ -28,7 +28,13 @@ export const axiosBaseQuery =
         data,
         params,
         headers: {
-          "Content-Type": contentType || "application/json",
+          // যদি contentType পাঠানো হয় তবে সেটা নেবে,
+          // নয়তো ডিফল্ট application/json নেবে,
+          // কিন্তু যদি ডেটা FormData হয় তবে Header থেকে Content-Type বাদ দিয়ে দিতে হবে।
+          ...headers,
+          ...(data instanceof FormData
+            ? {} // FormData হলে axios নিজে Content-Type হ্যান্ডেল করবে
+            : { "Content-Type": contentType || "application/json" }),
         },
       });
       return result;
