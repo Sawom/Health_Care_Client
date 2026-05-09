@@ -37,7 +37,7 @@ const DoctorsProfilePage = async ({ params }: PropTypes) => {
 
   return (
     <Container>
-      <Box my={5}>
+      <Box my={9}>
         <Typography variant="h4" fontWeight={700} textAlign="center">
           Doctor&apos;s Profile Details
         </Typography>

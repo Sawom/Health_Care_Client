@@ -6,8 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import stethoscope from "@/assets/images/Stetoscope.png";
-import gridSvg from "@/assets/svgs/grid.svg";
 
 const Specialist = () => {
   const [specialties, setSpecialties] = useState([]);

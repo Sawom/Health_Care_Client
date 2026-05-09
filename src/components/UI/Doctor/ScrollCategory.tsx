@@ -36,15 +36,15 @@ const ScrollCategory = ({ specialties }: { specialties: string }) => {
         borderBottom: 1,
         borderColor: "divider",
         mb: 3,
+        mt: 6,
       }}
     >
       <Tabs
-        
         value={data?.some((s: any) => s.title === value) ? value : false}
         onChange={handleChange}
         variant="scrollable"
         scrollButtons="auto"
-        allowScrollButtonsMobile // mobile scrool
+        allowScrollButtonsMobile
         aria-label="specialty tabs"
         sx={{
           "& .MuiTabs-indicator": {
@@ -52,13 +52,13 @@ const ScrollCategory = ({ specialties }: { specialties: string }) => {
             borderRadius: "3px 3px 0 0",
           },
           "& .MuiTab-root": {
-            textTransform: "none", 
-            minWidth: { xs: 100, sm: 160 }, 
+            textTransform: "none",
+            minWidth: { xs: 100, sm: 160 },
             fontSize: { xs: "14px", md: "16px" },
             fontWeight: 600,
             color: "text.secondary",
             "&.Mui-selected": {
-              color: "primary.main", 
+              color: "primary.main",
             },
           },
         }}
