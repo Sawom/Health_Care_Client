@@ -74,11 +74,11 @@ const DoctorScheduleSlots = ({ id }: { id: string }) => {
   const schedulesOfTomorrow = nextDoctorSchedules?.doctorSchedules;
 
   const availableSlots = doctorSchedules?.filter(
-    (doctor: DoctorSchedule) => !doctor.isBooked
+    (doctor: DoctorSchedule) => !doctor.isBooked,
   );
 
   const availableNextDaySlots = schedulesOfTomorrow?.filter(
-    (doctor: DoctorSchedule) => !doctor.isBooked
+    (doctor: DoctorSchedule) => !doctor.isBooked,
   );
 
   const [createAppointment] = useCreateAppointmentMutation();
@@ -109,7 +109,12 @@ const DoctorScheduleSlots = ({ id }: { id: string }) => {
   return (
     <Box mb={5}>
       <Box sx={{ bgcolor: "white", p: 3, mt: 1 }}>
-        <Typography variant="h4" mb={3} color="primary.main">
+        <Typography
+          variant="h4"
+          fontWeight={800}
+          mb={4}
+          sx={{ color: "#1a1a1a", letterSpacing: "-0.02em" }}
+        >
           Availability
         </Typography>
         <Typography variant="h6" fontSize={16}>
@@ -123,9 +128,9 @@ const DoctorScheduleSlots = ({ id }: { id: string }) => {
             ) : (
               availableSlots?.map((doctorSchedule: DoctorSchedule) => {
                 const formattedTimeSlot = `${getTimeIn12HourFormat(
-                  doctorSchedule?.schedule?.startDate
+                  doctorSchedule?.schedule?.startDate,
                 )} - ${getTimeIn12HourFormat(
-                  doctorSchedule?.schedule?.endDate
+                  doctorSchedule?.schedule?.endDate,
                 )}`;
 
                 return (
@@ -163,9 +168,9 @@ const DoctorScheduleSlots = ({ id }: { id: string }) => {
             ) : (
               availableNextDaySlots?.map((doctorSchedule: DoctorSchedule) => {
                 const formattedTimeSlot = `${getTimeIn12HourFormat(
-                  doctorSchedule?.schedule?.startDate
+                  doctorSchedule?.schedule?.startDate,
                 )} - ${getTimeIn12HourFormat(
-                  doctorSchedule?.schedule?.endDate
+                  doctorSchedule?.schedule?.endDate,
                 )}`;
 
                 return (
