@@ -54,81 +54,126 @@ const faqData = [
 const FAQ = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
-  // Handle accordion change
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
 
   return (
-    <Container sx={{ py: 10 }}>
+    <Container sx={{ py: { xs: 8, md: 12 } }}>
       {/* Section Header */}
-      <Box textAlign="center" mb={6}>
-        <Typography color="primary" fontWeight={700} variant="h6">
-          Support
-        </Typography>
-        <Typography variant="h4" fontWeight={800} mt={1}>
-          Frequently Asked Questions
-        </Typography>
-      </Box>
-
-      {/* Accordion Container with Framer Motion */}
-      <Box
-        component={motion.div}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        sx={{ maxWidth: "800px", mx: "auto" }}
+        transition={{ duration: 0.6 }}
       >
-        {faqData.map((faq, index) => (
-          <Accordion
-            key={index}
-            expanded={expanded === `panel${index}`}
-            onChange={handleChange(`panel${index}`)}
-            elevation={0}
-            sx={{
-              mb: 2,
-              border: "1px solid #e0e0e0",
-              borderRadius: "12px !important", // Rounded corners for each accordion
-              "&:before": { display: "none" }, // Remove default MUI line
-              overflow: "hidden",
-              transition: "all 0.3s ease",
-              "&:hover": { borderColor: "#1586FD" },
-              boxShadow:
-                expanded === `panel${index}`
-                  ? "0px 4px 20px rgba(0,0,0,0.05)"
-                  : "none",
-            }}
+        <Box textAlign="center" mb={6}>
+          <Typography
+            color="primary"
+            fontWeight={700}
+            variant="h6"
+            sx={{ textTransform: "uppercase", letterSpacing: 1 }}
           >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon color="primary" />}
+            Support
+          </Typography>
+          <Typography
+            variant="h4"
+            fontWeight={800}
+            mt={1}
+            fontSize={{ xs: "1.8rem", md: "2.5rem" }}
+          >
+            Frequently Asked Questions
+          </Typography>
+        </Box>
+      </motion.div>
+
+      {/* Accordion Container */}
+      <Box sx={{ maxWidth: "850px", mx: "auto" }}>
+        {faqData.map((faq, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <Accordion
+              expanded={expanded === `panel${index}`}
+              onChange={handleChange(`panel${index}`)}
+              elevation={0}
+              disableGutters // অতিরিক্ত স্পেসিং রিমুভ করে
               sx={{
-                px: 3,
-                py: 1,
-                bgcolor:
-                  expanded === `panel${index}`
-                    ? "rgba(21, 134, 253, 0.02)"
-                    : "transparent",
+                mb: 2,
+                border: "1px solid #f0f0f0", // ডিফল্ট বর্ডার খুব হালকা
+                borderRadius: "16px !important",
+                "&:before": { display: "none" },
+                overflow: "hidden",
+                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                // ক্লিক বা হোভারে বর্ডার কালার চেঞ্জ হবে না
+                "&.Mui-expanded": {
+                  border: "1px solid #f0f0f0",
+                  boxShadow: "0px 10px 30px rgba(0,0,0,0.04)",
+                },
               }}
             >
-              <Typography
-                fontWeight={600}
-                color={
-                  expanded === `panel${index}` ? "primary" : "text.primary"
-                }
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon color="primary" />}
+                sx={{
+                  px: 3,
+                  py: 1.5,
+                  // ক্লিক করলে নীল বর্ডার বা আউটলাইন আসবে না
+                  "&.Mui-focusVisible": { bgcolor: "transparent" },
+                  bgcolor:
+                    expanded === `panel${index}`
+                      ? "rgba(21, 134, 253, 0.03)"
+                      : "transparent",
+                }}
               >
-                {faq.question}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails
-              sx={{ px: 3, pb: 3, bgcolor: "rgba(21, 134, 253, 0.02)" }}
-            >
-              <Typography color="text.secondary" lineHeight={1.7}>
-                {faq.answer}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+                <Typography
+                  fontWeight={600}
+                  fontSize={{ xs: "1rem", md: "1.1rem" }}
+                  color={
+                    expanded === `panel${index}`
+                      ? "primary.main"
+                      : "text.primary"
+                  }
+                >
+                  {faq.question}
+                </Typography>
+              </AccordionSummary>
+
+              <AccordionDetails
+                sx={{
+                  px: 3,
+                  pb: 3,
+                  bgcolor:
+                    expanded === `panel${index}`
+                      ? "rgba(21, 134, 253, 0.03)"
+                      : "transparent",
+                }}
+              >
+                {/* টেক্সট ওপেন হওয়ার সময় হালকা এনিমেশন */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={
+                    expanded === `panel${index}`
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: -10 }
+                  }
+                  transition={{ duration: 0.3 }}
+                >
+                  <Typography
+                    color="text.secondary"
+                    lineHeight={1.8}
+                    fontSize="0.95rem"
+                  >
+                    {faq.answer}
+                  </Typography>
+                </motion.div>
+              </AccordionDetails>
+            </Accordion>
+          </motion.div>
         ))}
       </Box>
     </Container>
