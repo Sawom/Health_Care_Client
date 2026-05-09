@@ -30,7 +30,10 @@ const Specialist = () => {
   }, []);
 
   if (loading) return <p>Loading...</p>;
-  if (!specialties.length) return null;
+
+  if (!specialties || specialties.length === 0) {
+    return null;
+  }
 
   return (
     <Box

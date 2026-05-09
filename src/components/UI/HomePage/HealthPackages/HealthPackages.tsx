@@ -19,7 +19,7 @@ import { toast } from "sonner";
 const packages = [
   {
     name: "Basic Care",
-    price: "25",
+    price: "2000",
     color: "#1586FD",
     features: [
       "10 Consultations",
@@ -30,7 +30,7 @@ const packages = [
   },
   {
     name: "Standard Care",
-    price: "55",
+    price: "5000",
     color: "#00C38B",
     isRecommended: true,
     features: [
@@ -43,7 +43,7 @@ const packages = [
   },
   {
     name: "Premium Care",
-    price: "99",
+    price: "9000",
     color: "#1586FD",
     features: [
       "Family Coverage (4)",
@@ -87,7 +87,7 @@ const HealthPackages = () => {
         <Typography color="primary" fontWeight={700} variant="h6">
           Pricing Plans
         </Typography>
-        <Typography variant="h4" fontWeight={800} mt={1}>
+        <Typography variant="h4" fontWeight={700} mt={1}>
           Affordable Health Packages
         </Typography>
       </Box>
@@ -152,7 +152,7 @@ const HealthPackages = () => {
             </Typography>
             <Stack direction="row" alignItems="baseline" spacing={0.5} my={2}>
               <Typography variant="h3" fontWeight={800} color="primary">
-                ${pkg.price}
+                {pkg.price} BDT
               </Typography>
               <Typography color="text.secondary">/month</Typography>
             </Stack>
