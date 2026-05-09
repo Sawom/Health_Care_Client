@@ -25,6 +25,7 @@
     "agora-react-uikit": "^1.2.0",
     "axios": "^1.11.0",
     "dayjs": "^1.11.18",
+    "framer-motion": "^12.38.0",
     "install": "0.13.0",
     "jwt-decode": "^4.0.0",
     "next": "^15.5.9",

@@ -1,3 +1,4 @@
+import HealthPackages from "@/components/UI/HomePage/HealthPackages/HealthPackages";
 import dynamic from "next/dynamic";
 
 const HeroSection = dynamic(
@@ -30,6 +31,7 @@ const HomePage = () => {
       <Specialist />
       <TopRatedDoctors />
       <WhyUs />
+      <HealthPackages />
       <HowItWorks />
       <Stats />
     </>
