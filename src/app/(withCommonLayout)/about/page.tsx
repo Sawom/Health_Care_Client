@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import {
   LocalHospital,
@@ -127,6 +127,17 @@ const staggerContainer: Variants = {
 };
 
 const AboutUs = () => {
+  // to avoid Hydration Error and show content
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return <div className="bg-white min-h-screen" />;
+  }
+
   return (
     <div className="bg-white text-slate-900 overflow-hidden">
       {/* Hero Section */}
