@@ -141,7 +141,7 @@ const AboutUs = () => {
   return (
     <div className="bg-white text-slate-900 overflow-hidden">
       {/* Hero Section */}
-      <section className="relative h-[50vh] md:h-[70vh] flex items-center justify-center">
+      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center">
         <Image
           src={aboutus}
           className="absolute inset-0 w-full h-full object-cover"

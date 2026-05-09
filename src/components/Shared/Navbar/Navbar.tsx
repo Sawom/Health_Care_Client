@@ -15,8 +15,11 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useState } from "react";
 
+import { usePathname } from "next/navigation";
+
 export default function Navbar() {
   const userInfo = getUserInfo();
+  const pathname = usePathname();
   // console.log(userInfo);
 
   // dynamic auth button
@@ -29,8 +32,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const menuItems = [
-    { label: "About Us", href: "/about" },
     { label: "Doctors", href: "/doctors" },
+    { label: "About Us", href: "/about" },
     { label: "Services", href: "/services" },
   ];
 
@@ -83,22 +86,43 @@ export default function Navbar() {
             alignItems="center"
             sx={{ display: { xs: "none", md: "flex" } }}
           >
-            {menuItems.map((item) => (
-              <Typography
-                key={item.label}
-                component={Link}
-                href={item.href}
-                sx={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  fontSize: "0.95rem",
-                  fontWeight: 500,
-                  "&:hover": { color: "primary.main" },
-                }}
-              >
-                {item.label}
-              </Typography>
-            ))}
+            {menuItems.map((item) => {
+              const isActive = pathname === item.href;
+
+              return (
+                <Typography
+                  key={item.label}
+                  component={Link}
+                  href={item.href}
+                  sx={{
+                    textDecoration: "none",
+                    fontSize: "0.95rem",
+                    fontWeight: isActive ? 700 : 500,
+                    color: isActive ? "primary.main" : "inherit",
+                    transition: "color 0.3s ease",
+                    "&:hover": {
+                      color: "primary.main",
+                    },
+
+                    position: "relative",
+                    "&::after": isActive
+                      ? {
+                          content: '""',
+                          position: "absolute",
+                          bottom: -4,
+                          left: 0,
+                          width: "100%",
+                          height: "2px",
+                          bgcolor: "primary.main",
+                          borderRadius: "10px",
+                        }
+                      : {},
+                  }}
+                >
+                  {item.label}
+                </Typography>
+              );
+            })}
 
             {userInfo?.email ? (
               <Typography
@@ -152,23 +176,43 @@ export default function Navbar() {
         </Stack>
 
         <Stack spacing={3}>
-          {menuItems.map((item) => (
-            <Typography
-              key={item.label}
-              component={Link}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              sx={{
-                textDecoration: "none",
-                color: "inherit",
-                fontSize: "1.1rem",
-                fontWeight: 500,
-                "&:hover": { color: "primary.main" },
-              }}
-            >
-              {item.label}
-            </Typography>
-          ))}
+          {menuItems.map((item) => {
+            const isActive = pathname === item.href;
+
+            return (
+              <Typography
+                key={item.label}
+                component={Link}
+                href={item.href}
+                sx={{
+                  textDecoration: "none",
+                  fontSize: "0.95rem",
+                  fontWeight: isActive ? 700 : 500,
+                  color: isActive ? "primary.main" : "inherit",
+                  transition: "color 0.3s ease",
+                  "&:hover": {
+                    color: "primary.main",
+                  },
+
+                  position: "relative",
+                  "&::after": isActive
+                    ? {
+                        content: '""',
+                        position: "absolute",
+                        bottom: -4,
+                        left: 0,
+                        width: "30%",
+                        height: "2px",
+                        bgcolor: "primary.main",
+                        borderRadius: "10px",
+                      }
+                    : {},
+                }}
+              >
+                {item.label}
+              </Typography>
+            );
+          })}
 
           {userInfo?.email ? (
             <Typography
@@ -178,7 +222,7 @@ export default function Navbar() {
               sx={{
                 textDecoration: "none",
                 color: "inherit",
-                fontSize: "1.1rem",
+                fontSize: "1rem",
                 fontWeight: 500,
               }}
             >

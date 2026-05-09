@@ -14,6 +14,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
+import banner from '../../../assets/services/banner-service.jpg';
+import img1 from "../../../assets/services/vCare.jpg";
+import img2 from "../../../assets/services/homeCare.jpg";
+import img3 from "../../../assets/services/lab.jpg";
+
 const services = [
   {
     title: "Virtual Care & Remote Monitoring",
@@ -65,6 +70,30 @@ const services = [
 const ServicesPage = () => {
   return (
     <Box sx={{ bgcolor: "#fff", color: "#1a1a1a" }}>
+      {/* Hero Section */}
+      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center">
+        <Image
+          src={banner}
+          className="absolute inset-0 w-full h-full object-cover"
+          alt="Banner"
+        />
+
+        <div className="absolute inset-0 bg-black/65"></div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center px-6"
+        >
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 italic">
+            Our Services
+          </h1>
+          <p className="text-white text-lg md:text-2xl max-w-3xl mx-auto font-light">
+            Experience world-class healthcare with our technology-driven medical
+            services tailored for your well-being.
+          </p>
+        </motion.div>
+      </section>
       {/* --- Minimalist Header --- */}
       <Container maxWidth="md" sx={{ pt: 15, pb: 10, textAlign: "center" }}>
         <motion.div
