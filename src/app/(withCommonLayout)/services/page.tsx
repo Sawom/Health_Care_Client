@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-import banner from '../../../assets/services/banner-service.jpg';
+import banner from "../../../assets/services/banner-service.jpg";
 import img1 from "../../../assets/services/vCare.jpg";
 import img2 from "../../../assets/services/homeCare.jpg";
 import img3 from "../../../assets/services/lab.jpg";
@@ -31,8 +31,7 @@ const services = [
       "End-to-end patient data encryption for maximum privacy",
       "Direct chat support with medical assistants",
     ],
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1000",
+    image: img1,
     direction: "row",
   },
   {
@@ -46,8 +45,7 @@ const services = [
       "At-home sample collection & vital monitoring",
       "Emergency nursing support & wound care management",
     ],
-    image:
-      "https://images.unsplash.com/photo-1581578731522-745d44d8b518?auto=format&fit=crop&q=80&w=1000",
+    image: img2,
     direction: "row-reverse",
   },
   {
@@ -61,8 +59,7 @@ const services = [
       "Digital access to radiology & lab reports within hours",
       "Seamless integration with doctor consultation portals",
     ],
-    image:
-      "https://images.unsplash.com/photo-1579152276532-8320d9e8046c?auto=format&fit=crop&q=80&w=1000",
+    image: img3,
     direction: "row",
   },
 ];
