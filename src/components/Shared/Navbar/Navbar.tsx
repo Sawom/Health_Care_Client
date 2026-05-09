@@ -27,23 +27,11 @@ export default function Navbar() {
   );
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  // const [isScrolled, setIsScrolled] = useState(false);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > 20) {
-  //       setIsScrolled(true);
-  //     } else {
-  //       setIsScrolled(false);
-  //     }
-  //   };
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
 
   const menuItems = [
     { label: "About Us", href: "/about" },
     { label: "Doctors", href: "/doctors" },
+    { label: "Services", href: "/services" },
   ];
 
   return (
