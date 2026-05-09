@@ -51,7 +51,7 @@ const faqData = [
   },
 ];
 
-const FAQSection = () => {
+const FAQ = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
   // Handle accordion change
@@ -135,4 +135,4 @@ const FAQSection = () => {
   );
 };
 
-export default FAQSection;
+export default FAQ;

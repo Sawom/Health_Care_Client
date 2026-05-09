@@ -12,7 +12,7 @@ const Testimonials = dynamic(
   },
 );
 
-const FAQSection = dynamic(() => import("@/components/UI/HomePage/FAQ/FAQ"), {
+const FAQ = dynamic(() => import("@/components/UI/HomePage/FAQ/FAQ"), {
   ssr: true,
 });
 
@@ -51,7 +51,7 @@ const HomePage = () => {
       <HowItWorks />
       <Testimonials />
       <Stats />
-      <FAQSection />
+      <FAQ />
     </>
   );
 };
