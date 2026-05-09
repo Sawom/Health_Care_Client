@@ -1,12 +1,26 @@
-import FAQSection from "@/components/UI/HomePage/FAQ/FAQ";
-import HealthPackages from "@/components/UI/HomePage/HealthPackages/HealthPackages";
-import Testimonials from "@/components/UI/HomePage/Testimonials/Testimonials";
 import dynamic from "next/dynamic";
 
 const HeroSection = dynamic(
   () => import("@/components/UI/HomePage/HeroSection/HeroSection"),
   { ssr: true },
 );
+
+const Testimonials = dynamic(
+  () => import("@/components/UI/HomePage/Testimonials/Testimonials"),
+  {
+    ssr: true,
+  },
+);
+
+const FAQSection = dynamic(() => import("@/components/UI/HomePage/FAQ/FAQ"), {
+  ssr: true,
+});
+
+const HealthPackages = dynamic(
+  () => import("@/components/UI/HomePage/HealthPackages/HealthPackages"),
+  { ssr: true },
+);
+
 const Specialist = dynamic(
   () => import("@/components/UI/HomePage/Specialist/Specialist"),
   { ssr: true },
