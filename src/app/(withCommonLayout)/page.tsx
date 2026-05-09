@@ -1,3 +1,4 @@
+import FAQSection from "@/components/UI/HomePage/FAQ/FAQ";
 import HealthPackages from "@/components/UI/HomePage/HealthPackages/HealthPackages";
 import Testimonials from "@/components/UI/HomePage/Testimonials/Testimonials";
 import dynamic from "next/dynamic";
@@ -36,6 +37,7 @@ const HomePage = () => {
       <HowItWorks />
       <Testimonials />
       <Stats />
+      <FAQSection />
     </>
   );
 };
