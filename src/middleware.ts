@@ -6,11 +6,7 @@ type Role = keyof typeof roleBasedPrivateRoutes;
 
 const AuthRoutes = ["/login", "/register"];
 
-const commonPrivateRoutes = [
-  // "/dashboard",
-  "/dashboard/change-password",
-  "/doctors",
-];
+const commonPrivateRoutes = ["/dashboard/change-password", "/doctors"];
 
 const roleBasedPrivateRoutes = {
   PATIENT: [/^\/dashboard\/patient/],
@@ -24,20 +20,36 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const accessToken = request.cookies.get("accessToken")?.value;
 
-  // ১. যদি টোকেন না থাকে
+  // ১. লগআউট থাকলে লগইন/রেজিস্টার এ যেতে দাও, অন্যথায় লগইনে পাঠাও
   if (!accessToken) {
     if (AuthRoutes.includes(pathname)) {
       return NextResponse.next();
     } else {
-      return NextResponse.redirect(new URL("/login", request.url));
+      // যদি ইউজার ড্যাশবোর্ড বা প্রাইভেট রুটে যেতে চায়
+      if (
+        pathname.startsWith("/dashboard") ||
+        commonPrivateRoutes.includes(pathname)
+      ) {
+        return NextResponse.redirect(new URL("/login", request.url));
+      }
+      // পাবলিক রুটের জন্য যেও (যেমন: হোমপেজ)
+      return NextResponse.next();
     }
   }
 
   // ২. টোকেন ডিকোড করা
   let decodedData: any = null;
   if (accessToken) {
-    decodedData = jwtDecode(accessToken);
+    try {
+      decodedData = jwtDecode(accessToken);
+    } catch (err) {
+      // টোকেন ইনভ্যালিড হলে কুকি ডিলিট করে লগইনে পাঠানো ভালো
+      const response = NextResponse.redirect(new URL("/login", request.url));
+      response.cookies.delete("accessToken");
+      return response;
+    }
   }
+
   const role = decodedData?.role;
 
   // ৩. স্পেশাল হ্যান্ডলিং: ইউজার যদি সরাসরি /dashboard এ হিট করে
@@ -51,8 +63,7 @@ export function middleware(request: NextRequest) {
   }
 
   // ৪. কমন প্রাইভেট রুট চেক (change-password, doctors ইত্যাদি)
-  const isCommonRoute = commonPrivateRoutes.includes(pathname);
-  if (accessToken && isCommonRoute) {
+  if (commonPrivateRoutes.includes(pathname)) {
     return NextResponse.next();
   }
 
@@ -64,10 +75,15 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // যদি উপরের কোনো কন্ডিশন না মিলে
-  return NextResponse.redirect(new URL("/", request.url));
+  // যদি কোনো কন্ডিশন না মিলে এবং রুটটি প্রাইভেট হয় তবেই হোমে পাঠাও
+  if (
+    pathname.startsWith("/dashboard") ||
+    commonPrivateRoutes.includes(pathname)
+  ) {
+    return NextResponse.next();
+  }
 }
 
 export const config = {
-  matcher: ["/login", "/register", "/dashboard/:page*"],
+  matcher: ["/login", "/register", "/doctors", "/dashboard/:path*"],
 };
