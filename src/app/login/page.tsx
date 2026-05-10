@@ -193,6 +193,30 @@ const LoginPage = () => {
               </Typography>
             </RForm>
           </Box>
+          {/* demo account */}
+          <Box
+            sx={{
+              mt: 3,
+              p: 2,
+
+              borderRadius: 1,
+            }}
+          >
+            <Typography
+              variant="body2"
+              sx={{ fontWeight: "bold", mb: 1, color: "#1976d2" }}
+            >
+              Demo Accounts:
+            </Typography>
+
+            <Typography variant="body2" sx={{ my: 0.5 }}>
+              <strong>Doctor:</strong> alexper@example.com | pass: 1234567
+            </Typography>
+
+            <Typography variant="body2">
+              <strong>Patient:</strong> test123@gmail.com | pass: 123456
+            </Typography>
+          </Box>
         </Box>
       </Stack>
     </Container>
