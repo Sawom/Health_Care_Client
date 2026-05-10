@@ -45,11 +45,6 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
 
     case USER_ROLE.ADMIN:
       roleMenus.push(
-        // {
-        //   title: "Dashboard",
-        //   path: `${role}`,
-        //   icon: DashboardIcon,
-        // },
         {
           title: "Specialties",
           path: `${role}/specialties`,
@@ -69,18 +64,11 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
       break;
 
     case USER_ROLE.DOCTOR:
-      roleMenus.push(
-        {
-          title: "Dashboard",
-          path: `${role}`,
-          icon: DashboardIcon,
-        },
-        {
-          title: "Schedules",
-          path: `${role}/schedules`,
-          icon: CalendarMonthIcon,
-        },
-      );
+      roleMenus.push({
+        title: "Schedules",
+        path: `${role}/schedules`,
+        icon: CalendarMonthIcon,
+      });
       break;
 
     case USER_ROLE.PATIENT:

@@ -1,3 +1,4 @@
+"use client";
 import PHModal from "@/components/Shared/PHModal/PHModal";
 import { useCreateDoctorScheduleMutation } from "@/redux/api/doctorScheduleApi";
 import { useGetAllSchedulesQuery } from "@/redux/api/scheduleApi";
@@ -62,7 +63,7 @@ const DoctorScheduleModal = ({ open, setOpen }: TProps) => {
       <Stack direction={"column"} gap={2}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-            label="Controlled picker"
+            label="Select Date"
             value={dayjs(selectedDate)}
             onChange={(newValue) =>
               setSelectedDate(dayjs(newValue).toISOString())
