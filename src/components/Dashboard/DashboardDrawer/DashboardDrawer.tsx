@@ -31,9 +31,9 @@ export default function DashboardDrawer({
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) {
-    return <div className="bg-white min-h-screen" />;
-  }
+  // if (!isMounted) {
+  //   return <div className="bg-white min-h-screen" suppressHydrationWarning />;
+  // }
 
   const handleDrawerClose = () => {
     setIsClosing(true);

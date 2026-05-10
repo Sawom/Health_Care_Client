@@ -78,7 +78,7 @@ export default function MultipleSelectFieldChip({
             return (
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {finalSchedules?.map((value: any) => {
-                  const selectedSchedule = schedules.find(
+                  const selectedSchedule = finalSchedules.find(
                     (schedule: any) => schedule.id === value,
                   );
 
