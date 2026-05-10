@@ -27,7 +27,7 @@ const DoctorSchedulesPage = () => {
 
   const [allSchedule, setAllSchedule] = useState<any>([]);
   const { data, isLoading } = useGetAllDoctorSchedulesQuery({ ...query });
-  //  console.log(data);
+  console.log("data= ", data);
   const [deleteDoctorSchedule] = useDeleteDoctorScheduleMutation();
 
   // schedule delete
@@ -61,12 +61,12 @@ const DoctorSchedulesPage = () => {
   };
 
   useEffect(() => {
-    const updateData = schedules?.map((schedule: ISchedule, index: number) => {
+    const updateData = schedules?.map((item: any) => {
       return {
-        id: schedule?.scheduleId,
-        startDate: dateFormatter(schedule?.schedule?.startDate),
-        startTime: dayjs(schedule?.startDate).format("hh:mm a"),
-        endTime: dayjs(schedule?.endDate).format("hh:mm a"),
+        id: item?.scheduleId, 
+        startDate: dayjs(item?.schedule?.startDateTime).format("YYYY-MM-DD"),
+        startTime: dayjs(item?.schedule?.startDateTime).format("hh:mm a"),
+        endTime: dayjs(item?.schedule?.endDateTime).format("hh:mm a"),
       };
     });
     setAllSchedule(updateData);
