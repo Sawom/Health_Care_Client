@@ -1,5 +1,8 @@
 "use client";
-import { useGetAllDoctorSchedulesQuery } from "@/redux/api/doctorScheduleApi";
+import {
+  useGetAllDoctorSchedulesQuery,
+  useDeleteDoctorScheduleMutation,
+} from "@/redux/api/doctorScheduleApi";
 import { ISchedule } from "@/types/schedule";
 import { dateFormatter } from "@/utils/dateFormatter";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,6 +12,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import DoctorScheduleModal from "./components/DoctorScheduleModal";
+import { toast } from "sonner";
 
 const DoctorSchedulesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -16,14 +20,30 @@ const DoctorSchedulesPage = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(3);
+  const [limit, setLimit] = useState(10);
 
   query["page"] = page;
   query["limit"] = limit;
 
   const [allSchedule, setAllSchedule] = useState<any>([]);
   const { data, isLoading } = useGetAllDoctorSchedulesQuery({ ...query });
-  console.log(data);
+  //  console.log(data);
+  const [deleteDoctorSchedule] = useDeleteDoctorScheduleMutation();
+
+  // schedule delete
+  const handleDelete = async (id: string) => {
+    // console.log("Deleting ID:", id);
+
+    try {
+      const res = await deleteDoctorSchedule(id).unwrap();
+
+      if (res?.id || res?.scheduleId) {
+        toast.success("Schedule deleted successfully!");
+      }
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Failed to delete schedule!");
+    }
+  };
 
   const schedules = data?.doctorSchedules;
   const meta = data?.meta;
@@ -64,7 +84,7 @@ const DoctorSchedulesPage = () => {
       align: "center",
       renderCell: ({ row }) => {
         return (
-          <IconButton aria-label="delete">
+          <IconButton aria-label="delete" onClick={() => handleDelete(row.id)}>
             <DeleteIcon sx={{ color: "red" }} />
           </IconButton>
         );

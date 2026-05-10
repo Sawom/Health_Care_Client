@@ -71,15 +71,15 @@ export default function MultipleSelectFieldChip({
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={selectedScheduleIds || []}
+          value={selectedScheduleIds}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="chip" />}
           renderValue={(selected) => {
             return (
               <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                {finalSchedules?.map((value: any) => {
+                {selected?.map((value: any) => {
                   const selectedSchedule = finalSchedules.find(
-                    (schedule: any) => schedule.id === value,
+                    (item: any) => item.id === value,
                   );
 
                   if (!selectedSchedule) return null;
