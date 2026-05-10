@@ -26,6 +26,7 @@ const TopRatedDoctors = async () => {
 
   return (
     <section
+      suppressHydrationWarning={true}
       className="relative my-10 py-20 px-4 sm:px-6 lg:px-10"
       style={{
         backgroundColor: "rgba(20,20,20,0.05)",

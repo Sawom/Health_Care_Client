@@ -187,7 +187,10 @@ const RegisterPage = () => {
                 Register
               </Button>
               <Typography component="p" fontWeight={300}>
-                Do you already have an account? <Link href="/login">Login</Link>
+                Do you already have an account?{" "}
+                <Link className="underline mx-3 " href="/login">
+                  Login
+                </Link>
               </Typography>
             </RForm>
           </Box>

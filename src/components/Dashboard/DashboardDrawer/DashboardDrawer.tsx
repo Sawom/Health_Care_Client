@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Avatar, Stack } from "@mui/material";
@@ -20,8 +21,19 @@ export default function DashboardDrawer({
 }: {
   children: React.ReactNode;
 }) {
+  const { data, isLoading } = useGetSingleUserQuery({});
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return <div className="bg-white min-h-screen" />;
+  }
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -38,11 +50,10 @@ export default function DashboardDrawer({
     }
   };
 
-  const { data, isLoading } = useGetSingleUserQuery({});
   // console.log(data);
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} suppressHydrationWarning={true}>
       <CssBaseline />
       <AppBar
         position="fixed"

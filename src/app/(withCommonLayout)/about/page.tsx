@@ -8,7 +8,6 @@ import {
   Psychology,
   Favorite,
   Visibility,
-  Emergency,
   CheckCircleOutline,
   AutoGraph,
 } from "@mui/icons-material";

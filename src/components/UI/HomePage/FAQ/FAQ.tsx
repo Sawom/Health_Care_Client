@@ -68,7 +68,7 @@ const FAQ = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <Box textAlign="center" mb={6}>
+        <Box textAlign="center" mb={6} suppressHydrationWarning={true}>
           <Typography
             color="primary"
             fontWeight={700}

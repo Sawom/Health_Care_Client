@@ -48,6 +48,7 @@ const HowItWorks = () => {
         viewport={{ once: true }}
       >
         <Box
+          suppressHydrationWarning={true}
           sx={{ textAlign: { xs: "center", md: "left" }, mb: { xs: 6, md: 8 } }}
         >
           <Typography variant="h6" color="primary.main" fontWeight={600} mb={1}>

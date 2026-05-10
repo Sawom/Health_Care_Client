@@ -13,8 +13,8 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const validationSchema = z.object({
-  oldPassword: z.string().min(6, "Must be at least 6 characters long"),
-  newPassword: z.string().min(6, "Must be at least 6 characters long"),
+  oldPassword: z.string().min(5, "Must be at least 5 characters long"),
+  newPassword: z.string().min(5, "Must be at least 5 characters long"),
 });
 
 const ChangePassword = () => {

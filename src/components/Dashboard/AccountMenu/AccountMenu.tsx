@@ -92,9 +92,7 @@ export default function AccountMenu() {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
-        slotProps={{
-          ...menuStyles,
-        }}
+        slotProps={menuStyles}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
