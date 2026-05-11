@@ -66,9 +66,9 @@ const services = [
 
 const ServicesPage = () => {
   return (
-    <Box sx={{ bgcolor: "#fff", color: "#1a1a1a" }}>
+    <Box sx={{ bgcolor: "#fff", color: "#1a1a1a", overflowX: "hidden" }}>
       {/* Hero Section */}
-      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center">
+      <section className="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
         <Image
           src={banner}
           className="absolute inset-0 w-full h-full object-cover"
@@ -80,19 +80,27 @@ const ServicesPage = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 text-center px-6"
+          className="relative z-10 text-center px-4 md:px-6 w-full"
         >
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 italic">
+          <h1 className="text-2xl md:text-5xl font-bold text-white mb-4 italic break-words">
             Our Services
           </h1>
-          <p className="text-white text-lg md:text-2xl max-w-3xl mx-auto font-light">
+          <p className="text-white text-base md:text-2xl max-w-3xl mx-auto font-light break-words">
             Experience world-class healthcare with our technology-driven medical
             services tailored for your well-being.
           </p>
         </motion.div>
       </section>
+
       {/* --- Minimalist Header --- */}
-      <Container maxWidth="md" sx={{ pt: 15, pb: 10, textAlign: "center" }}>
+      <Container
+        maxWidth="md"
+        sx={{
+          pt: { xs: 8, md: 15 },
+          pb: { xs: 6, md: 10 },
+          textAlign: "center",
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -101,10 +109,12 @@ const ServicesPage = () => {
           <Typography
             variant="overline"
             sx={{
-              letterSpacing: 5,
+              letterSpacing: { xs: 2, md: 5 },
               fontWeight: 700,
-              fontSize: { xs: "1rem", md: "1.5rem" },
+              fontSize: { xs: "0.8rem", md: "1.5rem" },
               color: "primary.main",
+              display: "block",
+              wordBreak: "break-word",
             }}
           >
             EXCELLENCE IN CARE
@@ -114,19 +124,21 @@ const ServicesPage = () => {
             fontWeight={700}
             sx={{
               mt: 2,
-              fontSize: { xs: "2rem", md: "3.2rem" },
-              letterSpacing: "-2px",
+              fontSize: { xs: "1.8rem", md: "3.2rem" },
+              letterSpacing: "-1px",
+              lineHeight: 1.2,
+              wordWrap: "break-word", // লম্বা টেক্সট ভেঙে নিচে যাবে
             }}
           >
             Medical Services Redefined
           </Typography>
           <Box
             sx={{
-              width: 80,
+              width: 60,
               height: 4,
               bgcolor: "primary.main",
               mx: "auto",
-              mt: 4,
+              mt: 3,
               borderRadius: 2,
             }}
           />
@@ -135,31 +147,31 @@ const ServicesPage = () => {
 
       {/* --- Content Sections --- */}
       <Container maxWidth="lg">
-        <Stack spacing={20} sx={{ pb: 20 }}>
+        <Stack spacing={{ xs: 10, md: 20 }} sx={{ pb: { xs: 10, md: 20 } }}>
           {services.map((service, index) => (
             <Stack
               key={index}
               direction={{ xs: "column", md: service.direction as any }}
               alignItems="center"
-              gap={{ xs: 6, md: 10 }}
+              gap={{ xs: 4, md: 10 }}
             >
               {/* Image Side */}
               <Box
                 component={motion.div}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 1, ease: "circOut" }}
                 sx={{ flex: 1.2, width: "100%" }}
               >
                 <Box
                   sx={{
                     position: "relative",
-                    height: { xs: 380, md: 580 },
+                    height: { xs: 250, sm: 350, md: 580 },
                     width: "100%",
-                    borderRadius: "32px",
+                    borderRadius: { xs: "16px", md: "32px" },
                     overflow: "hidden",
-                    boxShadow: "0 30px 60px -12px rgba(0,0,0,0.12)",
+                    boxShadow: "0 20px 40px -12px rgba(0,0,0,0.12)",
                   }}
                 >
                   <Image
@@ -177,12 +189,21 @@ const ServicesPage = () => {
                 component={motion.div}
                 initial={{
                   opacity: 0,
+                  y: 30,
+                  // এখানে সরাসরি অবজেক্ট না দিয়ে একটি নির্দিষ্ট ভ্যালু দিন
+                  // অথবা নেগেটিভ/পজিটিভ ভ্যালু কন্ডিশনাললি হ্যান্ডেল করুন
                   x: service.direction === "row" ? 50 : -50,
                 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                sx={{ flex: 1 }}
+                sx={{
+                  flex: 1,
+                  width: "100%",
+                  // যদি মোবাইলে (xs) x-axis মুভমেন্ট না চান, তবে sx দিয়ে সেটি কন্ট্রোল করা ভালো
+                  display: "flex",
+                  flexDirection: "column",
+                }}
               >
                 <Typography
                   variant="h6"
@@ -190,9 +211,9 @@ const ServicesPage = () => {
                   fontWeight={800}
                   sx={{
                     mb: 1.5,
-                    fontSize: "0.85rem",
+                    fontSize: "0.75rem",
                     textTransform: "uppercase",
-                    letterSpacing: 3,
+                    letterSpacing: 2,
                   }}
                 >
                   {service.subtitle}
@@ -201,10 +222,11 @@ const ServicesPage = () => {
                   variant="h3"
                   fontWeight={700}
                   sx={{
-                    mb: 3,
-                    lineHeight: 1.1,
+                    mb: 2,
+                    lineHeight: 1.2,
                     color: "#111",
-                    fontSize: { xs: "2.2rem", md: "2.8rem" },
+                    fontSize: { xs: "1.75rem", md: "2.8rem" },
+                    wordWrap: "break-word",
                   }}
                 >
                   {service.title}
@@ -213,10 +235,12 @@ const ServicesPage = () => {
                   variant="body1"
                   sx={{
                     color: "text.secondary",
-                    fontSize: "1.1rem",
-                    mb: 4,
-                    lineHeight: 1.8,
+                    fontSize: { xs: "0.95rem", md: "1.1rem" },
+                    mb: 3,
+                    lineHeight: 1.6,
                     fontWeight: 400,
+                    textAlign: "justify", // টেক্সট সুন্দর দেখানোর জন্য
+                    wordWrap: "break-word",
                   }}
                 >
                   {service.description}
@@ -225,19 +249,20 @@ const ServicesPage = () => {
                 {/* Key Points List */}
                 <List sx={{ mb: 2 }}>
                   {service.points.map((point, pIndex) => (
-                    <ListItem key={pIndex} sx={{ px: 0, py: 1 }}>
-                      <ListItemIcon sx={{ minWidth: 40 }}>
+                    <ListItem key={pIndex} sx={{ px: 0, py: 0.5 }}>
+                      <ListItemIcon sx={{ minWidth: 32 }}>
                         <CheckCircleOutlineIcon
                           color="primary"
-                          sx={{ fontSize: 22 }}
+                          sx={{ fontSize: 20 }}
                         />
                       </ListItemIcon>
                       <ListItemText
                         primary={point}
                         primaryTypographyProps={{
                           fontWeight: 600,
-                          fontSize: "1.05rem",
+                          fontSize: { xs: "0.9rem", md: "1.05rem" },
                           color: "#222",
+                          sx: { wordBreak: "break-word" },
                         }}
                       />
                     </ListItem>
@@ -252,7 +277,8 @@ const ServicesPage = () => {
       {/* --- Simple Support Section --- */}
       <Box
         sx={{
-          py: 5,
+          py: { xs: 3, md: 3 },
+          px: 2,
           bgcolor: "#fafafa",
           textAlign: "center",
           borderTop: "1px solid #f0f0f0",
@@ -262,18 +288,30 @@ const ServicesPage = () => {
           <Typography
             variant="h4"
             fontWeight={800}
-            sx={{ mb: 1, color: "#333" }}
+            sx={{
+              mb: 1,
+              color: "#333",
+              fontSize: { xs: "1.5rem", md: "2.125rem" },
+            }}
           >
-            Need Assistance with Our Services?
+            Need Assistance?
           </Typography>
           <Typography
             variant="h3"
             fontWeight={700}
-            sx={{ color: "primary.main", mb: 2 }}
+            sx={{
+              color: "primary.main",
+              mb: 2,
+              fontSize: { xs: "1.2rem", sm: "1.8rem", md: "3rem" },
+              wordBreak: "break-all", // ফোন নম্বর বড় হলে ভেঙে যাবে
+            }}
           >
             Help Desk: +8801150000000
           </Typography>
-          <Typography variant="body1" sx={{ color: "#777", fontWeight: 500 }}>
+          <Typography
+            variant="body1"
+            sx={{ color: "#777", fontWeight: 500, fontSize: "0.9rem" }}
+          >
             Available 24/7 for emergency support and general inquiries.
           </Typography>
         </Container>
