@@ -53,7 +53,7 @@ const HeroSection = () => {
             component="h1"
             fontWeight={700}
             fontSize={{ xs: "1.8rem", md: "3.5rem" }}
-            sx={{ lineHeight: 1.2 }}
+            sx={{ lineHeight: 1.2, py: { xs: 2 } }}
           >
             Healthier Hearts
           </Typography>
